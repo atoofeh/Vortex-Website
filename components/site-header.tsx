@@ -83,7 +83,7 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
       <header className="fixed inset-x-0 top-3.5 z-50 px-4 sm:top-5">
         <div
           className={
-            "mx-auto grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-full border backdrop-blur-xl transition-all duration-300 " +
+            "mx-auto grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-full border backdrop-blur-xl transition-all duration-150 " +
             chromeClass
           }
         >
@@ -160,7 +160,7 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.18 }}
             className="fixed inset-0 z-40 flex flex-col justify-between gap-8 overflow-y-auto overscroll-contain bg-[#1F050C]/98 px-6 pb-10 pt-28 backdrop-blur-2xl md:hidden"
           >
             <div className="flex items-center justify-between border-b border-gold/20 pb-6">
@@ -193,7 +193,7 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
                   onClick={() => setOpen(false)}
                   initial={reducedMotion ? false : { opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.06 + index * 0.05 }}
+                  transition={{ duration: 0.2, delay: index * 0.025 }}
                   className="display focus-ring rounded-xl py-3 text-3xl text-cream hover:text-champagne"
                 >
                   {item.label}
@@ -209,7 +209,7 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
               }}
               initial={reducedMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.25 }}
+              transition={{ duration: 0.2, delay: 0.12 }}
               className="focus-ring flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold to-champagne px-5 py-4 text-sm font-bold text-ink shadow-[0_0_25px_rgba(212,175,55,0.4)]"
             >
               <Sparkles size={16} />

@@ -826,6 +826,51 @@ button {
   scrollbar-width: none;
 }
 
+/* Keep touch devices responsive: decorative motion and GPU-heavy filters add
+   visual polish on desktop but compete with scrolling and taps on phones. */
+@media (max-width: 767px) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 180ms !important;
+  }
+
+  body::after {
+    display: none;
+  }
+
+  .vortex-field {
+    display: none;
+  }
+
+  .node-network {
+    filter: none;
+  }
+
+  .node-network-traces path,
+  .node-network-nodes circle,
+  .node-network-halos circle,
+  .node-network-labels text,
+  .world-map,
+  .world-map-dot,
+  .world-map-hotspots circle,
+  .iridescent {
+    animation: none !important;
+  }
+
+  .backdrop-blur-sm,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .liquid-glass-card {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .liquid-glass-card {
+    background: rgba(66, 17, 30, 0.92);
+  }
+}
+
 @keyframes star-shimmer {
   0%, 100% {
     opacity: 0.15;

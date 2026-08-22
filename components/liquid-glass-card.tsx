@@ -2,6 +2,7 @@
 
 import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import type { PointerEvent, ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 type LiquidGlassCardProps = {
   eyebrow: string;
@@ -15,6 +16,7 @@ const MAX_TILT = 6;
 
 export function LiquidGlassCard({ eyebrow, title, body, consequence, icon }: LiquidGlassCardProps) {
   const reducedMotion = useReducedMotion();
+  const [canHover, setCanHover] = useState(false);
   const cardX = useMotionValue(0);
   const cardY = useMotionValue(0);
   const rotateX = useSpring(0, { stiffness: 150, damping: 15 });
@@ -22,8 +24,16 @@ export function LiquidGlassCard({ eyebrow, title, body, consequence, icon }: Liq
   const specularOpacity = useSpring(0, { stiffness: 220, damping: 30 });
   const specular = useMotionTemplate`radial-gradient(circle 320px at ${cardX}px ${cardY}px, rgba(255,243,209,0.22), rgba(212,175,55,0.10) 40%, transparent 70%)`;
 
+  useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const sync = () => setCanHover(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
+
   const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
-    if (reducedMotion || event.pointerType !== "mouse") return;
+    if (!canHover || reducedMotion || event.pointerType !== "mouse") return;
 
     const bounds = event.currentTarget.getBoundingClientRect();
     const x = event.clientX - bounds.left;
@@ -40,12 +50,12 @@ export function LiquidGlassCard({ eyebrow, title, body, consequence, icon }: Liq
   };
 
   const handlePointerEnter = (event: PointerEvent<HTMLElement>) => {
-    if (reducedMotion || event.pointerType !== "mouse") return;
+    if (!canHover || reducedMotion || event.pointerType !== "mouse") return;
     specularOpacity.set(1);
   };
 
   const handlePointerLeave = () => {
-    if (reducedMotion) return;
+    if (!canHover || reducedMotion) return;
     rotateX.set(0);
     rotateY.set(0);
     specularOpacity.set(0);
@@ -61,7 +71,7 @@ export function LiquidGlassCard({ eyebrow, title, body, consequence, icon }: Liq
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
       style={{ rotateX, rotateY }}
-      whileHover={reducedMotion ? undefined : { y: -6 }}
+      whileHover={canHover && !reducedMotion ? { y: -6 } : undefined}
       className="liquid-glass-card p-7 sm:p-9"
     >
       <span aria-hidden="true" className="liquid-glass-rim" />

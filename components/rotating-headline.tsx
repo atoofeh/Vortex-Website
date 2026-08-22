@@ -66,14 +66,14 @@ export function RotatingHeadline() {
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
               key={phrase}
-              initial={{ opacity: 0, y: 22, filter: "blur(3px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -14, filter: "blur(3px)" }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
               transition={{
-                duration: 0.78,
+                duration: 0.45,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="rotating-headline-gradient block w-fit max-w-full whitespace-normal break-words py-1 [will-change:transform,opacity,filter]"
+              className="rotating-headline-gradient block w-fit max-w-full whitespace-normal break-words py-1 [will-change:transform,opacity]"
             >
               {phrase}
             </motion.span>
