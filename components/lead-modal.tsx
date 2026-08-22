@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles, X } from "lucide-react";
 import { memo, useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import { siteConfig } from "@/lib/site-content";
 
 interface LeadModalProps {
   isOpen: boolean;
@@ -167,9 +168,26 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
         submittedAt: new Date().toISOString(),
       };
 
-      // Email delivery can subscribe to this event when the mail provider is connected.
+      // Keep the event available for a future server-side mail integration.
       window.dispatchEvent(new CustomEvent<AssessmentRequest>("vortex:assessment-request", { detail: request }));
+
+      const subject = `VORTEX System Assessment — ${serviceType}`;
+      const body = [
+        "VORTEX System Assessment Request",
+        "",
+        `Name: ${request.name}`,
+        `Work email: ${request.email}`,
+        `Company: ${request.company || "Not provided"}`,
+        `Requested service: ${request.serviceType}`,
+        "",
+        "Solution brief:",
+        request.solutionDescription,
+        "",
+        `Submitted from ${window.location.origin}`,
+      ].join("\\n");
+
       setSubmitted(true);
+      window.location.href = `${siteConfig.contactHref}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     }
   };
 
@@ -236,7 +254,7 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
                   Thank you, <strong className="text-cream">{name}</strong>. Your <strong className="text-champagne">{serviceType.toLowerCase()}</strong> brief for <strong className="text-champagne">{company || "your organisation"}</strong> is ready in this browser.
                 </p>
                 <div className="mt-5 rounded-2xl border border-gold/20 bg-[#2D0812]/70 p-4 text-xs font-mono text-champagne">
-                  <strong>Next step:</strong> Secure email delivery will be enabled once the mail provider is connected. Your requested reply address is <strong className="text-cream">{email}</strong>.
+                  <strong>Next step:</strong> Your email app should open with this request addressed to <strong className="text-cream">{siteConfig.contactEmail}</strong>. Press Send to complete delivery. We will reply to <strong className="text-cream">{email}</strong>.
                 </div>
                 <div className="mt-8">
                   <button

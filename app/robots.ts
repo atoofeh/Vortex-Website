@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: "https://vortex-tech.com/sitemap.xml",
+    sitemap: "https://www.vortexmind.co/sitemap.xml",
   };
 }

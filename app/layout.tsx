@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vortex-tech.com"),
+  metadataBase: new URL("https://www.vortexmind.co"),
   title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
   description: siteConfig.thesis,
   icons: {
@@ -52,10 +52,10 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://vortex-tech.com/#organization",
+      "@id": "https://www.vortexmind.co/#organization",
       "name": "VORTEX — AI & IT Solutions",
-      "url": "https://vortex-tech.com",
-      "logo": "https://vortex-tech.com/Logo.png",
+      "url": "https://www.vortexmind.co",
+      "logo": "https://www.vortexmind.co/Logo.png",
       "description": siteConfig.thesis,
       "address": {
         "@type": "PostalAddress",
@@ -70,10 +70,10 @@ const jsonLd = {
     },
     {
       "@type": "Service",
-      "@id": "https://vortex-tech.com/#service",
+      "@id": "https://www.vortexmind.co/#service",
       "name": "Sovereign AI & Private Infrastructure",
       "provider": {
-        "@id": "https://vortex-tech.com/#organization"
+        "@id": "https://www.vortexmind.co/#organization"
       },
       "serviceType": "Private AI Computing Infrastructure & Agent Orchestration",
       "description": siteConfig.thesis

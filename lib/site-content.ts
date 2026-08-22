@@ -10,8 +10,8 @@ export const siteConfig = {
   primaryCtaHref: "#contact",
   secondaryCta: "Explore Technical Blueprint",
   secondaryCtaHref: "#architecture",
-  contactEmail: "contact@vortex-tech.com",
-  contactHref: "mailto:contact@vortex-tech.com",
+  contactEmail: "contact@vortexmind.co",
+  contactHref: "mailto:contact@vortexmind.co",
   location: "Amman, Jordan",
   nav: [
     { label: "Capabilities", href: "#capabilities" },
