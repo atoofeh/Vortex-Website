@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, CheckCircle2, Sparkles, X } from "lucide-react";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { memo, useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 
 interface LeadModalProps {
   isOpen: boolean;
@@ -27,6 +27,39 @@ const SERVICE_OPTIONS = [
   { id: "other", label: "Something Else", desc: "A custom IT, infrastructure, security, or software requirement" },
 ];
 
+type ServiceOptionCardProps = {
+  id: string;
+  label: string;
+  desc: string;
+  selected: boolean;
+  onSelect: (label: string) => void;
+};
+
+const ServiceOptionCard = memo(function ServiceOptionCard({
+  id,
+  label,
+  desc,
+  selected,
+  onSelect,
+}: ServiceOptionCardProps) {
+  return (
+    <button
+      key={id}
+      type="button"
+      onClick={() => onSelect(label)}
+      className={
+        "w-full rounded-2xl border p-4 text-left transition-[color,border-color,background-color,box-shadow] duration-150 " +
+        (selected
+          ? "border-gold bg-gold/15 text-cream shadow-sm"
+          : "border-gold/20 bg-[#2D0812]/50 text-muted hover:border-gold/40 hover:text-cream")
+      }
+    >
+      <div className="font-display text-sm font-bold text-cream">{label}</div>
+      <div className="mt-0.5 text-xs text-muted">{desc}</div>
+    </button>
+  );
+});
+
 export function LeadModal({ isOpen, onClose }: LeadModalProps) {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -37,6 +70,10 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
   const [company, setCompany] = useState("");
 
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleServiceSelect = useCallback((label: string) => {
+    setServiceType(label);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -188,20 +225,14 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
                         1. What would you like us to build?
                       </p>
                       {SERVICE_OPTIONS.map((item) => (
-                        <button
+                        <ServiceOptionCard
                           key={item.id}
-                          type="button"
-                          onClick={() => setServiceType(item.label)}
-                          className={
-                            "w-full rounded-2xl border p-4 text-left transition-all " +
-                            (serviceType === item.label
-                              ? "border-gold bg-gold/15 text-cream shadow-sm"
-                              : "border-gold/20 bg-[#2D0812]/50 text-muted hover:border-gold/40 hover:text-cream")
-                          }
-                        >
-                          <div className="font-display text-sm font-bold text-cream">{item.label}</div>
-                          <div className="mt-0.5 text-xs text-muted">{item.desc}</div>
-                        </button>
+                          id={item.id}
+                          label={item.label}
+                          desc={item.desc}
+                          selected={serviceType === item.label}
+                          onSelect={handleServiceSelect}
+                        />
                       ))}
                     </div>
                   )}
