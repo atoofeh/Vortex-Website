@@ -60,6 +60,67 @@ const ServiceOptionCard = memo(function ServiceOptionCard({
   );
 });
 
+type SolutionBriefStepProps = {
+  initialValue: string;
+  onBack: () => void;
+  onNext: (value: string) => void;
+};
+
+const SolutionBriefStep = memo(function SolutionBriefStep({
+  initialValue,
+  onBack,
+  onNext,
+}: SolutionBriefStepProps) {
+  const [text, setText] = useState(initialValue);
+
+  const handleNext = () => {
+    const value = text.trim();
+    if (value) onNext(value);
+  };
+
+  return (
+    <div className="space-y-3">
+      <p className="font-mono text-xs font-semibold uppercase tracking-wider text-muted mb-2">
+        2. Describe the solution you need
+      </p>
+      <p className="text-sm leading-relaxed text-muted">
+        Explain what you want to create, who it is for, and what it should do.
+      </p>
+      <textarea
+        required
+        autoFocus
+        value={text}
+        onChange={(event) => setText(event.target.value)}
+        maxLength={5000}
+        placeholder="Describe the solution that you need..."
+        rows={7}
+        className="w-full resize-y rounded-2xl border border-gold/25 bg-[#140207] px-4 py-3 text-sm leading-relaxed text-cream placeholder-muted/50 outline-none transition-colors focus:border-gold"
+      />
+      <p className="font-mono text-[0.62rem] leading-relaxed text-muted">
+        Hint: include important features, integrations, users, or constraints.
+      </p>
+      <div className="mt-8 flex items-center justify-between border-t border-gold/15 pt-5">
+        <button
+          type="button"
+          onClick={onBack}
+          className="focus-ring flex items-center gap-1.5 font-mono text-xs font-bold uppercase text-muted hover:text-cream"
+        >
+          <ArrowLeft size={13} />
+          Back
+        </button>
+        <button
+          type="button"
+          onClick={handleNext}
+          className="focus-ring flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-champagne to-gold px-6 py-3 text-xs font-bold uppercase tracking-wider text-ink shadow-[0_0_20px_rgba(212,175,55,0.35)] hover:brightness-110"
+        >
+          <span>Next</span>
+          <ArrowRight size={13} />
+        </button>
+      </div>
+    </div>
+  );
+});
+
 export function LeadModal({ isOpen, onClose }: LeadModalProps) {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
@@ -93,7 +154,6 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
   const handleNext = (e: FormEvent) => {
     e.preventDefault();
     if (step < 3) {
-      if (step === 2 && !solutionDescription.trim()) return;
       setStep(step + 1);
     } else {
       if (!email || !name) return;
@@ -239,27 +299,14 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
 
                   {/* Step 2: Solution Brief */}
                   {step === 2 && (
-                    <div className="space-y-3">
-                      <p className="font-mono text-xs font-semibold uppercase tracking-wider text-muted mb-2">
-                        2. Describe the solution you need
-                      </p>
-                      <p className="text-sm leading-relaxed text-muted">
-                        Explain what you want to create, who it is for, and what it should do.
-                      </p>
-                      <textarea
-                        required
-                        autoFocus
-                        value={solutionDescription}
-                        onChange={(event) => setSolutionDescription(event.target.value)}
-                        maxLength={5000}
-                        placeholder="Describe the solution that you need..."
-                        rows={7}
-                        className="w-full resize-y rounded-2xl border border-gold/25 bg-[#140207] px-4 py-3 text-sm leading-relaxed text-cream placeholder-muted/50 outline-none transition-colors focus:border-gold"
-                      />
-                      <p className="font-mono text-[0.62rem] leading-relaxed text-muted">
-                        Hint: include important features, integrations, users, or constraints.
-                      </p>
-                    </div>
+                    <SolutionBriefStep
+                      initialValue={solutionDescription}
+                      onBack={handleBack}
+                      onNext={(value) => {
+                        setSolutionDescription(value);
+                        setStep(3);
+                      }}
+                    />
                   )}
 
                   {/* Step 3: Contact Information */}
@@ -313,7 +360,7 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
                   )}
 
                   {/* Step Navigation Actions */}
-                  <div className="mt-8 flex items-center justify-between border-t border-gold/15 pt-5">
+                  {step !== 2 && <div className="mt-8 flex items-center justify-between border-t border-gold/15 pt-5">
                     {step > 1 ? (
                       <button
                         type="button"
@@ -344,7 +391,7 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
                         </>
                       )}
                     </button>
-                  </div>
+                  </div>}
                 </form>
               </div>
             )}
