@@ -130,6 +130,8 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -152,7 +154,7 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
     };
   }, [isOpen, onClose]);
 
-  const handleNext = (e: FormEvent) => {
+  const handleNext = async (e: FormEvent) => {
     e.preventDefault();
     if (step < 3) {
       setStep(step + 1);
@@ -168,26 +170,28 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
         submittedAt: new Date().toISOString(),
       };
 
-      // Keep the event available for a future server-side mail integration.
-      window.dispatchEvent(new CustomEvent<AssessmentRequest>("vortex:assessment-request", { detail: request }));
+      setIsSubmitting(true);
+      setSubmitError("");
 
-      const subject = `VORTEX System Assessment — ${serviceType}`;
-      const body = [
-        "VORTEX System Assessment Request",
-        "",
-        `Name: ${request.name}`,
-        `Work email: ${request.email}`,
-        `Company: ${request.company || "Not provided"}`,
-        `Requested service: ${request.serviceType}`,
-        "",
-        "Solution brief:",
-        request.solutionDescription,
-        "",
-        `Submitted from ${window.location.origin}`,
-      ].join("\\n");
+      try {
+        const response = await fetch("/api/assessment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(request),
+        });
 
-      setSubmitted(true);
-      window.location.href = `${siteConfig.contactHref}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        if (!response.ok) {
+          const result = (await response.json().catch(() => null)) as { error?: string } | null;
+          throw new Error(result?.error || "The request could not be delivered.");
+        }
+
+        window.dispatchEvent(new CustomEvent<AssessmentRequest>("vortex:assessment-request", { detail: request }));
+        setSubmitted(true);
+      } catch (error) {
+        setSubmitError(error instanceof Error ? error.message : "The request could not be delivered. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -254,7 +258,7 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
                   Thank you, <strong className="text-cream">{name}</strong>. Your <strong className="text-champagne">{serviceType.toLowerCase()}</strong> brief for <strong className="text-champagne">{company || "your organisation"}</strong> is ready in this browser.
                 </p>
                 <div className="mt-5 rounded-2xl border border-gold/20 bg-[#2D0812]/70 p-4 text-xs font-mono text-champagne">
-                  <strong>Next step:</strong> Your email app should open with this request addressed to <strong className="text-cream">{siteConfig.contactEmail}</strong>. Press Send to complete delivery. We will reply to <strong className="text-cream">{email}</strong>.
+                  <strong>Next step:</strong> Your request has been sent to <strong className="text-cream">{siteConfig.contactEmail}</strong>. We will reply to <strong className="text-cream">{email}</strong>.
                 </div>
                 <div className="mt-8">
                   <button
@@ -377,6 +381,12 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
                     </div>
                   )}
 
+                  {submitError ? (
+                    <p role="alert" className="mt-5 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-xs leading-relaxed text-red-200">
+                      {submitError}
+                    </p>
+                  ) : null}
+
                   {/* Step Navigation Actions */}
                   {step !== 2 && <div className="mt-8 flex items-center justify-between border-t border-gold/15 pt-5">
                     {step > 1 ? (
@@ -394,13 +404,14 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
 
                     <button
                       type="submit"
+                      disabled={isSubmitting}
                       data-cursor="interactive"
-                      className="focus-ring flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-champagne to-gold px-6 py-3 text-xs font-bold uppercase tracking-wider text-ink shadow-[0_0_20px_rgba(212,175,55,0.35)] hover:brightness-110"
+                      className="focus-ring flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-champagne to-gold px-6 py-3 text-xs font-bold uppercase tracking-wider text-ink shadow-[0_0_20px_rgba(212,175,55,0.35)] transition-opacity hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
                     >
                       {step === 3 ? (
                         <>
                           <Sparkles size={14} />
-                          <span>Submit Assessment Brief</span>
+                          <span>{isSubmitting ? "Sending..." : "Submit Assessment Brief"}</span>
                         </>
                       ) : (
                         <>
@@ -419,3 +430,5 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
     </AnimatePresence>
   );
 }
+
+
