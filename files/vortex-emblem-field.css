@@ -1,0 +1,121 @@
+/* ==========================================================================
+   VORTEX — ambient emblem field
+   Import once from your global stylesheet:
+     @import "./vortex-emblem-field.css";
+   ========================================================================== */
+
+.vortex-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;               /* Behind every content section. */
+  pointer-events: none;     /* Never intercepts clicks, hovers, or focus. */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  contain: strict;          /* Isolates it from the page's layout and paint. */
+}
+
+.vortex-field svg {
+  /* Deliberately oversized and bled off-screen. The mark should be larger than
+     the viewport so you read a PORTION of it, never a complete emblem parked
+     in the middle of the page. */
+  width: 135vmax;
+  height: 135vmax;
+  flex: none;
+}
+
+/* --- Per-theme tuning -----------------------------------------------------
+   Gold on obsidian carries more presence than gold on pale paper, where it
+   stains yellow very quickly. Hence the different opacities, and the antique
+   gold on light. Adjust --vortex-field-opacity first if it reads too strong —
+   it is the single knob that matters. */
+
+:root,
+[data-theme="dark"],
+.dark {
+  --vortex-field-opacity: 0.10;
+  --vx-ink:        #D4AF37;                  /* Gold face contours. */
+  --vx-shade:      #8E1229;                  /* Maroon reverse contours. */
+  --vx-shade-fill: rgba(142, 18, 41, 0.30);  /* Whisper of fill for depth. */
+  --vx-line:       #D4AF37;                  /* Bezel hairlines — gold, or it
+                                                vanishes entirely on obsidian. */
+  --vx-sheen:      #F3DFA2;                  /* Highlight — lighter than gold. */
+}
+
+[data-theme="light"],
+.light {
+  --vortex-field-opacity: 0.075;
+  --vx-ink:        #7E0F26;                  /* On paper CRIMSON leads... */
+  --vx-shade:      #8A6A1C;                  /* ...and antique gold shades. */
+  --vx-shade-fill: rgba(138, 106, 28, 0.22);
+  --vx-line:       #7E0F26;                  /* Crimson bezel on paper. */
+  --vx-sheen:      #B08D2E;                  /* Must darken or it vanishes. */
+}
+
+.vortex-field {
+  opacity: var(--vortex-field-opacity);
+  transition: opacity 600ms ease;            /* No blink on theme toggle. */
+}
+
+/* --- Motion ---------------------------------------------------------------
+   The mark SETTLES, it does not spin. The V is a letterform; a full rotation
+   inverts your monogram for half of every cycle. The continuous rotation lives
+   in the bezel instead, turning the opposite way. That opposition is doing most
+   of the work here. */
+
+.vx-mark {
+  transform-origin: 0 0;    /* SVG user space origin is already the centre. */
+  animation: vx-settle 60s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.vx-bezel {
+  transform-origin: 0 0;
+  animation: vx-spin 150s linear infinite reverse;
+}
+
+.vx-sheen {
+  transform-origin: 0 0;
+  animation: vx-spin 14s linear infinite;
+}
+
+@keyframes vx-settle {
+  0%, 100% { transform: rotate(-9deg); }
+  50%      { transform: rotate(9deg); }
+}
+
+@keyframes vx-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Opt-in full rotation. Only sensible if the V is ever dropped from the mark. */
+.vortex-field--spin .vx-mark {
+  animation: vx-spin 110s linear infinite;
+}
+
+/* --- Reduced motion -------------------------------------------------------
+   Freeze, don't hide. The component handles this in JS too; this rule is the
+   belt-and-braces version for anything rendered before hydration. The mark is
+   parked at -6deg so the composition looks deliberate rather than accidentally
+   axis-aligned. */
+
+.vortex-field--still .vx-mark,
+.vortex-field--still .vx-bezel,
+.vortex-field--still .vx-sheen { animation: none; }
+.vortex-field--still .vx-mark  { transform: rotate(-6deg); }
+.vortex-field--still .vx-sheen { transform: rotate(-52deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vx-mark, .vx-bezel, .vx-sheen { animation: none; }
+  .vx-mark  { transform: rotate(-6deg); }
+  .vx-sheen { transform: rotate(-52deg); }
+}
+
+/* --- Content stacking -----------------------------------------------------
+   The field sits at z-index 0, so every content section must sit above it. If
+   your sections have no stacking context yet, this gives them one. */
+
+.vortex-field ~ * {
+  position: relative;
+  z-index: 1;
+}

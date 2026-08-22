@@ -1,0 +1,154 @@
+/* ==========================================================================
+   VORTEX — light theme tokens
+   --------------------------------------------------------------------------
+   The problem with the current light mode is almost certainly that it inverts
+   the dark tokens. Two things break when you do that:
+
+     1. #D4AF37 on white goes muddy. Gold reads as "precious" only against a
+        dark ground; against paper it reads as highlighter. On light it has to
+        DARKEN into antique gold to stay gold.
+     2. Full-saturation crimson on pure white vibrates at the edges, which is
+        what makes an inverted dark theme feel cheap even when the layout is
+        identical.
+
+   So light mode here is not dark mode flipped. It is a different material:
+   burgundy-tinted paper, ink that is warm-dark rather than black, crimson
+   deepened for contrast, and gold demoted to fills and hairlines only.
+   ========================================================================== */
+
+[data-theme="light"],
+.light {
+
+  /* --- Ground -------------------------------------------------------------
+     Not white. A warm, faintly rose paper derived from the obsidian-burgundy
+     of the dark theme, so the two modes are recognisably the same brand.
+     Pure white would leave the crimson nowhere to sit. */
+  --bg:              #F7F0EE;   /* Page canvas. */
+  --surface:         #FFFBFA;   /* Cards, panels — lifts off the canvas. */
+  --surface-sunk:    #EDE2DF;   /* Wells, code blocks, inactive tabs. */
+  --surface-raised:  #FFFFFF;   /* Modal and dropdown only. */
+
+  /* --- Ink ----------------------------------------------------------------
+     Warm near-black in the burgundy family. Neutral #111 next to a crimson
+     accent reads as two unrelated palettes stapled together. */
+  --ink:             #2A1015;   /* Headings, body. ~14.8:1 on --bg. */
+  --ink-muted:       #6B4A50;   /* Secondary copy, captions. ~5.6:1. */
+  --ink-faint:       #9A8087;   /* Eyebrows, disabled, meta. Large text only. */
+
+  /* --- Line ---------------------------------------------------------------
+     Warm hairlines. Grey rules on warm paper are the other common tell. */
+  --line:            #E2D3CF;   /* Default 1px hairline. */
+  --line-strong:     #CDB8B3;   /* Emphasised divider, input borders. */
+
+  /* --- Brand --------------------------------------------------------------
+     Crimson carries the light theme; gold supports it. This is the inverse of
+     the dark theme, where gold leads. That swap is what keeps the two modes
+     feeling equally considered instead of one being a fallback. */
+  --crimson:         #7E0F26;   /* Primary accent. ~9.2:1 on --bg. */
+  --crimson-hover:   #650B1E;
+  --crimson-wash:    #F5E4E4;   /* Tinted surface for badges and callouts. */
+
+  --gold:            #8A6A1C;   /* Antique gold. SAFE for text and icons. */
+  --gold-leaf:       #D4AF37;   /* Fills and hairlines ONLY — never as text. */
+  --gold-wash:       #F5EEDC;
+
+  /* --- Elevation ----------------------------------------------------------
+     Burgundy-tinted shadow. A neutral grey shadow on warm paper looks dirty. */
+  --shadow-sm:  0 1px 2px rgba(42, 16, 21, 0.06);
+  --shadow-md:  0 4px 14px rgba(42, 16, 21, 0.08);
+  --shadow-lg:  0 18px 48px rgba(42, 16, 21, 0.12);
+
+  /* --- Frosted chrome -----------------------------------------------------
+     Your floating header uses frosted glass. On light it needs a warm tint and
+     a bottom hairline, or it disappears into the page as you scroll. */
+  --chrome-bg:       rgba(255, 251, 250, 0.72);
+  --chrome-line:     rgba(42, 16, 21, 0.08);
+
+  /* --- Focus --------------------------------------------------------------
+     Crimson ring with a light halo. Keeps keyboard focus visible on both the
+     paper canvas and on filled crimson buttons. */
+  --focus-ring: 0 0 0 2px #F7F0EE, 0 0 0 4px #7E0F26;
+}
+
+/* ==========================================================================
+   Component-level corrections for light mode
+   These are the specific places where an inverted dark theme goes wrong.
+   ========================================================================== */
+
+/* 1. THE PRIMARY CTA.
+   On dark, gold-filled is right. On light, a gold-filled button reads as a
+   warning banner. Flip it: crimson fill, paper text, gold-leaf hairline. The
+   hairline is what keeps it feeling like the same brand. */
+[data-theme="light"] .cta-primary,
+.light .cta-primary {
+  background: var(--crimson);
+  color: var(--bg);
+  border: 1px solid var(--gold-leaf);
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="light"] .cta-primary:hover,
+.light .cta-primary:hover {
+  background: var(--crimson-hover);
+}
+
+/* 2. EYEBROW / LABEL TEXT.
+   Small caps gold labels (SOVEREIGN INTELLIGENCE, SYS-01, 01 DATA) are the
+   single worst offender when inverted — #D4AF37 at 12px on paper is close to
+   unreadable. Antique gold, and add tracking to compensate for the darker
+   value. */
+[data-theme="light"] .eyebrow,
+[data-theme="light"] .label-mono,
+.light .eyebrow,
+.light .label-mono {
+  color: var(--gold);
+  letter-spacing: 0.14em;
+}
+
+/* 3. SECTION DIVIDER HAIRLINES.
+   Gold hairlines survive the switch, but only at reduced alpha. At full
+   strength they look like underlining. */
+[data-theme="light"] .rule-gold,
+.light .rule-gold {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.55),
+    transparent
+  );
+}
+
+/* 4. THE 3D / CANVAS SECTIONS.
+   Anything that was drawing bright strokes on obsidian needs its stroke colour
+   inverted, not just its background. Point your canvas/scene colours at these
+   two vars rather than hardcoding. */
+[data-theme="light"] {
+  --scene-stroke: #7E0F26;
+  --scene-accent: #8A6A1C;
+}
+
+/* 5. SELECTED / ACTIVE STATES.
+   The security-layer matrix and pipeline stages likely use a gold glow for the
+   active item. Glow does not exist on paper — use a tinted well plus a solid
+   left rule instead. Note border-radius: 0 — a single-sided border with
+   rounded corners always looks like a rendering bug. */
+[data-theme="light"] .layer-item[aria-selected="true"],
+[data-theme="light"] .stage[data-active="true"],
+.light .layer-item[aria-selected="true"],
+.light .stage[data-active="true"] {
+  background: var(--crimson-wash);
+  border-left: 2px solid var(--crimson);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* 6. THE CALCULATOR READOUT.
+   Large numerals in gold-leaf on paper lose all their weight. Set the figures
+   in ink and let only the unit label carry the gold. */
+[data-theme="light"] .calc-figure,
+.light .calc-figure {
+  color: var(--ink);
+}
+[data-theme="light"] .calc-unit,
+.light .calc-unit {
+  color: var(--gold);
+}

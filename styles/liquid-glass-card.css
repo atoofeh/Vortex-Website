@@ -1,0 +1,451 @@
+/*
+ * VORTEX liquid glass cards
+ *
+ * The card is intentionally built from four layers. A single translucent
+ * rectangle reads as a grey panel; the refraction, rim, specular response,
+ * and inner lip are what make the surface feel dimensional without becoming
+ * playful or over-styled.
+ */
+
+.liquid-glass-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 28px;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  /* Saturation matters: blur alone washes the backdrop toward grey. */
+  -webkit-backdrop-filter: blur(22px) saturate(175%) brightness(1.06);
+  backdrop-filter: blur(22px) saturate(175%) brightness(1.06);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.055) 0%,
+    rgba(255, 255, 255, 0.012) 42%,
+    rgba(66, 17, 30, 0.28) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 20px 50px rgba(15, 2, 6, 0.7);
+  transition: box-shadow 220ms ease;
+}
+
+/* A quiet diagonal reflection keeps the glass legible even when the pointer
+   is still; the pointer-tracked specular remains the stronger interaction. */
+.liquid-glass-card::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 1px;
+  border-radius: 27px;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 26%,
+    transparent 48%,
+    rgba(212, 175, 55, 0.04) 100%
+  );
+  pointer-events: none;
+}
+
+.liquid-glass-card:hover,
+.liquid-glass-card:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 20px 50px rgba(15, 2, 6, 0.7),
+    0 0 25px rgba(212, 175, 55, 0.28);
+}
+
+/* A gradient rim is used instead of border so light can travel across the
+   edge. The mask punches out the center and leaves a one-pixel ring. */
+.liquid-glass-rim {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(212, 175, 55, 0.32) 28%,
+    rgba(212, 175, 55, 0.08) 55%,
+    rgba(255, 255, 255, 0.14) 100%
+  );
+  /* Mask-composite preserves the fill while revealing only the outer ring. */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.liquid-glass-specular {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+.liquid-glass-content {
+  position: relative;
+  z-index: 3;
+  transform: translateZ(38px);
+}
+
+.liquid-glass-eyebrow {
+  color: var(--champagne);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.liquid-glass-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.liquid-glass-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  margin-top: -0.3rem;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 0.95rem;
+  color: var(--gold);
+  background: linear-gradient(145deg, rgba(212, 175, 55, 0.18), rgba(126, 15, 38, 0.2));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 243, 209, 0.2),
+    0 0 20px rgba(212, 175, 55, 0.08);
+  transform: translateZ(44px);
+  transition: border-color 220ms ease, color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.liquid-glass-card:hover .liquid-glass-icon,
+.liquid-glass-card:focus-visible .liquid-glass-icon {
+  border-color: rgba(255, 243, 209, 0.7);
+  color: var(--champagne);
+  background: linear-gradient(145deg, rgba(212, 175, 55, 0.28), rgba(126, 15, 38, 0.3));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 243, 209, 0.3),
+    0 0 25px rgba(212, 175, 55, 0.18);
+}
+
+.liquid-glass-title {
+  margin-top: 1.25rem;
+  color: var(--cream);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.5rem, 2.2vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.liquid-glass-body {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.liquid-glass-body ul {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.7rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  padding-top: 1.25rem;
+}
+
+.liquid-glass-body li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.liquid-glass-body li::before {
+  content: "";
+  width: 0.35rem;
+  height: 0.35rem;
+  flex: 0 0 auto;
+  margin-top: 0.55rem;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.55);
+}
+
+.liquid-glass-consequence {
+  margin-top: 2rem;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: 16px;
+  background: rgba(45, 8, 18, 0.45);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+  padding: 1rem;
+}
+
+.liquid-glass-consequence-label {
+  color: var(--champagne);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.liquid-glass-consequence p {
+  margin-top: 0.35rem;
+  color: var(--cream);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.liquid-glass-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* FAQ rows use the same glass language at a quieter scale. The pale surface
+   in light mode is intentional: fixed burgundy fills become muddy on paper. */
+.faq-glass-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.055) 0%,
+    rgba(255, 255, 255, 0.012) 42%,
+    rgba(66, 17, 30, 0.3) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  backdrop-filter: blur(20px) saturate(165%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 14px 34px rgba(15, 2, 6, 0.34);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.faq-glass-card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(212, 175, 55, 0.2) 28%,
+    rgba(212, 175, 55, 0.04) 58%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+  pointer-events: none;
+}
+
+.faq-glass-card:hover,
+.faq-glass-card:focus-within {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 18px 38px rgba(15, 2, 6, 0.42),
+    0 0 20px rgba(212, 175, 55, 0.12);
+  transform: translateY(-2px);
+}
+
+.faq-glass-toggle,
+.faq-glass-answer {
+  position: relative;
+  z-index: 1;
+}
+
+.faq-glass-answer {
+  background: rgba(45, 8, 18, 0.12);
+}
+
+.light .faq-glass-card,
+[data-theme="light"] .faq-glass-card {
+  border-color: rgba(126, 15, 38, 0.2);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.86) 0%,
+    rgba(255, 255, 255, 0.72) 42%,
+    rgba(237, 226, 223, 0.62) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(145%);
+  backdrop-filter: blur(20px) saturate(145%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(45, 8, 18, 0.08),
+    0 12px 30px rgba(45, 8, 18, 0.1);
+}
+
+.light .faq-glass-card::before,
+[data-theme="light"] .faq-glass-card::before {
+  background: linear-gradient(
+    145deg,
+    rgba(126, 15, 38, 0.32) 0%,
+    rgba(98, 75, 20, 0.25) 30%,
+    rgba(98, 75, 20, 0.06) 58%,
+    rgba(126, 15, 38, 0.16) 100%
+  );
+}
+
+.light .faq-glass-card:hover,
+.light .faq-glass-card:focus-within,
+[data-theme="light"] .faq-glass-card:hover,
+[data-theme="light"] .faq-glass-card:focus-within {
+  border-color: rgba(126, 15, 38, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 rgba(45, 8, 18, 0.08),
+    0 16px 34px rgba(45, 8, 18, 0.12),
+    0 0 20px rgba(126, 15, 38, 0.1);
+}
+
+.light .faq-glass-answer,
+[data-theme="light"] .faq-glass-answer {
+  background: rgba(245, 238, 220, 0.58);
+  border-color: rgba(126, 15, 38, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-glass-card {
+    transition: none;
+  }
+}
+
+/* Light mode keeps the same construction but turns the glass white and the
+   rim crimson-leaning so the edge remains visible over alabaster. */
+.light .liquid-glass-card,
+[data-theme="light"] .liquid-glass-card {
+  /* More transparency lets the emblem field and paper gradients refract
+     through the panel instead of flattening it into a white card. */
+  -webkit-backdrop-filter: blur(26px) saturate(180%) brightness(1.06);
+  backdrop-filter: blur(26px) saturate(180%) brightness(1.06);
+  background:
+    radial-gradient(90% 80% at 0% 0%, rgba(255, 255, 255, 0.7), transparent 54%),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.36) 0%,
+      rgba(255, 255, 255, 0.12) 44%,
+      rgba(126, 15, 38, 0.08) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1px 0 rgba(126, 15, 38, 0.14),
+    0 16px 38px rgba(45, 8, 18, 0.13);
+}
+
+.light .liquid-glass-card::after,
+[data-theme="light"] .liquid-glass-card::after {
+  inset: 1px 38% 1px 1px;
+  border-radius: 27px 0 0 27px;
+  background: linear-gradient(
+    112deg,
+    rgba(255, 255, 255, 0.68) 0%,
+    rgba(255, 255, 255, 0.22) 38%,
+    transparent 78%
+  );
+  opacity: 0.8;
+  mix-blend-mode: screen;
+}
+
+.light .liquid-glass-icon,
+[data-theme="light"] .liquid-glass-icon {
+  border-color: rgba(126, 15, 38, 0.24);
+  color: #8a6811;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.66), rgba(212, 175, 55, 0.16));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 0 18px rgba(126, 15, 38, 0.08);
+}
+
+.light .liquid-glass-card:hover .liquid-glass-icon,
+.light .liquid-glass-card:focus-visible .liquid-glass-icon,
+[data-theme="light"] .liquid-glass-card:hover .liquid-glass-icon,
+[data-theme="light"] .liquid-glass-card:focus-visible .liquid-glass-icon {
+  border-color: rgba(126, 15, 38, 0.42);
+  color: #7e0f26;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(212, 175, 55, 0.22));
+}
+
+.light .liquid-glass-card:hover,
+.light .liquid-glass-card:focus-visible,
+[data-theme="light"] .liquid-glass-card:hover,
+[data-theme="light"] .liquid-glass-card:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(45, 8, 18, 0.1),
+    0 12px 36px rgba(45, 8, 18, 0.08),
+    0 0 25px rgba(126, 15, 38, 0.16);
+}
+
+.light .liquid-glass-rim,
+[data-theme="light"] .liquid-glass-rim {
+  background: linear-gradient(
+    145deg,
+    rgba(126, 15, 38, 0.3) 0%,
+    rgba(98, 75, 20, 0.28) 28%,
+    rgba(98, 75, 20, 0.1) 55%,
+    rgba(126, 15, 38, 0.18) 100%
+  );
+}
+
+.light .liquid-glass-specular,
+[data-theme="light"] .liquid-glass-specular {
+  mix-blend-mode: multiply;
+}
+
+.light .liquid-glass-consequence,
+[data-theme="light"] .liquid-glass-consequence {
+  background: rgba(242, 237, 228, 0.72);
+  border-color: rgba(126, 15, 38, 0.18);
+  box-shadow: inset 0 1px 2px rgba(45, 8, 18, 0.12);
+}
+
+/* Firefox and privacy-hardened browsers can disable backdrop-filter. A solid
+   panel keeps the text anchored to a readable surface in that case. */
+@supports not (backdrop-filter: blur(1px)) {
+  .liquid-glass-card {
+    background: var(--panel);
+  }
+
+  .light .liquid-glass-card,
+  [data-theme="light"] .liquid-glass-card {
+    background: var(--surface);
+  }
+}
+
+@media (hover: none) {
+  .liquid-glass-content {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass-card,
+  .liquid-glass-card * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .liquid-glass-specular {
+    opacity: 0 !important;
+  }
+}

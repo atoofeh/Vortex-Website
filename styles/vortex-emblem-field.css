@@ -1,0 +1,134 @@
+/* ==========================================================================
+   VORTEX — ambient emblem field
+   Import once from your global stylesheet:
+     @import "./vortex-emblem-field.css";
+   ========================================================================== */
+
+.vortex-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;               /* Behind every content section. */
+  pointer-events: none;     /* Never intercepts clicks, hovers, or focus. */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  contain: strict;          /* Isolates it from the page's layout and paint. */
+  opacity: var(--field-opacity, var(--vortex-field-opacity));
+  transition: opacity 300ms ease;
+}
+
+.vortex-field svg {
+  /* Precision scale: delicate background medallion framing the hero title */
+  width: 78vmax;
+  height: 78vmax;
+  flex: none;
+  transform: translate(18vw, -2vh);
+}
+
+@media (max-width: 768px) {
+  .vortex-field svg {
+    width: 90vmax;
+    height: 90vmax;
+    transform: translate(0, -6vh);
+  }
+}
+
+/* --- Per-theme tuning (25% opacity as specified in brand design review) --- */
+
+:root,
+[data-theme="dark"],
+.dark {
+  --vortex-field-opacity: 0.25;
+  --vx-ink:        #D4AF37;                  /* Gold face contours. */
+  --vx-shade:      #8E1229;                  /* Maroon reverse contours. */
+  --vx-shade-fill: rgba(142, 18, 41, 0.15);  /* Subtle fill for depth. */
+  --vx-line:       #D4AF37;                  /* Bezel hairlines */
+  --vx-sheen:      #F3DFA2;                  /* Highlight */
+}
+
+[data-theme="light"],
+.light {
+  --vortex-field-opacity: 0.3;
+  --vx-ink:        #7E0F26;                  /* Crimson contours */
+  --vx-shade:      #8A6A1C;                  /* Antique gold */
+  --vx-shade-fill: rgba(138, 106, 28, 0.10);
+  --vx-line:       #7E0F26;                  /* Crimson bezel */
+  --vx-sheen:      #B08D2E;
+}
+
+.vortex-field {
+  opacity: var(--vortex-field-opacity);
+  transition: opacity 600ms ease;            /* No blink on theme toggle. */
+}
+
+.vortex-field svg path,
+.vortex-field svg circle,
+.vortex-field svg rect {
+  transition: stroke 500ms cubic-bezier(0.4, 0, 0.2, 1), fill 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Motion ---------------------------------------------------------------
+   The mark SETTLES, it does not spin. The V is a letterform; a full rotation
+   inverts your monogram for half of every cycle. The continuous rotation lives
+   in the bezel instead, turning the opposite way. That opposition is doing most
+   of the work here. */
+
+.vx-mark {
+  transform-origin: 0 0;    /* SVG user space origin is already the centre. */
+  /* The mark barely settles; the bezel and highlight stay still so the hero
+     reads as a composed instrument panel instead of a looping screensaver. */
+  animation: vx-settle 180s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.vx-bezel {
+  transform-origin: 0 0;
+  animation: none;
+}
+
+.vx-sheen {
+  transform-origin: 0 0;
+  animation: none;
+}
+
+@keyframes vx-settle {
+  0%, 100% { transform: rotate(-9deg); }
+  50%      { transform: rotate(9deg); }
+}
+
+@keyframes vx-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Opt-in full rotation. Only sensible if the V is ever dropped from the mark. */
+.vortex-field--spin .vx-mark {
+  animation: vx-spin 110s linear infinite;
+}
+
+/* --- Reduced motion -------------------------------------------------------
+   Freeze, don't hide. The component handles this in JS too; this rule is the
+   belt-and-braces version for anything rendered before hydration. The mark is
+   parked at -6deg so the composition looks deliberate rather than accidentally
+   axis-aligned. */
+
+.vortex-field--still .vx-mark,
+.vortex-field--still .vx-bezel,
+.vortex-field--still .vx-sheen { animation: none; }
+.vortex-field--still .vx-mark  { transform: rotate(-6deg); }
+.vortex-field--still .vx-sheen { transform: rotate(-52deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vx-mark, .vx-bezel, .vx-sheen { animation: none; }
+  .vx-mark  { transform: rotate(-6deg); }
+  .vx-sheen { transform: rotate(-52deg); }
+}
+
+/* --- Content stacking -----------------------------------------------------
+   The field sits at z-index 0, so every content section must sit above it. If
+   your sections have no stacking context yet, this gives them one. */
+
+.vortex-field ~ * {
+  position: relative;
+  z-index: 1;
+}

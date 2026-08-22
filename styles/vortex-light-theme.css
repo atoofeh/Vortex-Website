@@ -1,0 +1,279 @@
+/* ==========================================================================
+   VORTEX — light theme tokens
+   --------------------------------------------------------------------------
+   Authoritative light mode design tokens.
+   ========================================================================== */
+
+[data-theme="light"],
+.light,
+html.light,
+body.light,
+.light-mode {
+  /* --- Ground ------------------------------------------------------------- */
+  --bg:              #F7F0EE;   /* Page canvas */
+  --bg-primary:      #F7F0EE;
+  --surface:         #FFFBFA;   /* Cards, panels */
+  --surface-sunk:    #EDE2DF;   /* Wells, inactive tabs */
+  --surface-raised:  #FFFFFF;   /* Modals & popovers */
+  --card-bg:         rgba(255, 251, 250, 0.94);
+  --card-border:     rgba(138, 106, 28, 0.22);
+
+  /* --- Ink & Typography --------------------------------------------------- */
+  --ink:             #2A1015;   /* Headings, primary body */
+  --text-primary:    #2A1015;
+  --cream:           #2A1015;   /* Inverted light role */
+  --ivory:           #3D1820;
+  --ink-muted:       #66464C;   /* Secondary copy, captions (passes 4.5:1 AA) */
+  --text-muted:      #66464C;
+  --muted:           #66464C;
+  --ink-faint:       #9A8087;   /* Disabled / meta */
+
+  /* --- Line & Border ------------------------------------------------------ */
+  --line:            #E2D3CF;
+  --line-strong:     #CDB8B3;
+
+  /* --- Brand Accents ------------------------------------------------------ */
+  --crimson:         #7E0F26;   /* Primary accent */
+  --crimson-hover:   #650B1E;
+  --crimson-wash:    #F5E4E4;   /* Tinted surface for badges */
+  --wine:            #F2EDE4;
+  --burgundy:        #EAE2D5;
+  --panel:           #FFFFFF;
+
+  --gold:            #624B14;   /* Darkened antique gold (passes 4.5:1 AA for text) */
+  --text-secondary:  #624B14;
+  --champagne:       #624B14;
+  --gold-leaf:       #D4AF37;   /* Fills and hairlines ONLY */
+  --gold-wash:       #F5EEDC;
+
+  /* --- Elevation ---------------------------------------------------------- */
+  --shadow-sm:  0 1px 2px rgba(42, 16, 21, 0.06);
+  --shadow-md:  0 4px 14px rgba(42, 16, 21, 0.08);
+  --shadow-lg:  0 18px 48px rgba(42, 16, 21, 0.12);
+
+  /* --- Frosted Chrome ----------------------------------------------------- */
+  --chrome-bg:       rgba(255, 251, 250, 0.88);
+  --chrome-line:     rgba(42, 16, 21, 0.12);
+
+  /* --- Focus -------------------------------------------------------------- */
+  --focus-ring: 0 0 0 2px #F7F0EE, 0 0 0 4px #7E0F26;
+}
+
+/* ==========================================================================
+   Component-level corrections for light mode
+   ========================================================================== */
+
+/* 1. Primary CTAs in Light Mode: Crimson fill, paper text, gold-leaf hairline */
+.light .cta-primary,
+.light button.bg-gradient-to-r,
+.light a.bg-gradient-to-r {
+  background: #7E0F26 !important;
+  color: #F7F0EE !important;
+  border: 1px solid #D4AF37 !important;
+  box-shadow: 0 4px 14px rgba(126, 15, 38, 0.25) !important;
+}
+
+.light .cta-primary:hover,
+.light button.bg-gradient-to-r:hover,
+.light a.bg-gradient-to-r:hover {
+  background: #650B1E !important;
+  filter: brightness(1.05);
+}
+
+/* 2. Eyebrow labels in Light Mode: Antique gold */
+.light .eyebrow,
+.light .label-mono,
+.light .text-champagne,
+.light .text-champagne\/90,
+.light .text-champagne\/80,
+.light .text-champagne\/70,
+.light [class*="text-champagne/"],
+[data-theme="light"] .eyebrow,
+[data-theme="light"] .label-mono,
+[data-theme="light"] .text-champagne,
+[data-theme="light"] .text-champagne\/90,
+[data-theme="light"] .text-champagne\/80,
+[data-theme="light"] .text-champagne\/70,
+[data-theme="light"] [class*="text-champagne/"] {
+  color: #624B14 !important;
+}
+
+/* 3. Text primary / headings */
+.light .text-cream,
+.light .text-cream\/90,
+.light .text-cream\/80,
+.light .text-cream\/75,
+.light .text-cream\/70,
+.light [class*="text-cream/"],
+.light .text-ivory,
+.light .text-ivory\/90,
+.light .text-ivory\/80,
+.light [class*="text-ivory/"],
+.light .display,
+.light h1,
+.light h2,
+.light h3,
+.light h4,
+[data-theme="light"] .text-cream,
+[data-theme="light"] .text-cream\/90,
+[data-theme="light"] .text-cream\/80,
+[data-theme="light"] .text-cream\/75,
+[data-theme="light"] .text-cream\/70,
+[data-theme="light"] [class*="text-cream/"],
+[data-theme="light"] .text-ivory,
+[data-theme="light"] .text-ivory\/90,
+[data-theme="light"] .text-ivory\/80,
+[data-theme="light"] [class*="text-ivory/"],
+[data-theme="light"] .display,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4 {
+  color: #2A1015 !important;
+}
+
+/* 4. Text muted */
+.light .text-muted,
+.light .text-muted\/90,
+.light .text-muted\/80,
+.light .text-muted\/70,
+.light [class*="text-muted/"],
+[data-theme="light"] .text-muted,
+[data-theme="light"] .text-muted\/90,
+[data-theme="light"] .text-muted\/80,
+[data-theme="light"] .text-muted\/70,
+[data-theme="light"] [class*="text-muted/"] {
+  color: #66464C !important;
+}
+
+/* 5. Cards & Panels in Light Mode */
+.light section,
+.light .section-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.light .bg-\[\#1F050C\],
+.light .bg-\[\#1F050C\]\/98,
+.light .bg-\[\#1F050C\]\/95,
+.light .bg-\[\#1F050C\]\/92,
+.light .bg-\[\#1F050C\]\/90,
+.light .bg-\[\#1F050C\]\/85,
+.light .bg-\[\#1F050C\]\/75,
+.light .bg-\[\#1F050C\]\/60,
+.light [class*="bg-[#1F050C]"],
+[data-theme="light"] [class*="bg-[#1F050C]"] {
+  background-color: rgba(255, 251, 250, 0.96) !important;
+  border-color: rgba(138, 106, 28, 0.25) !important;
+}
+
+.light .bg-\[\#2D0812\],
+.light .bg-\[\#2D0812\]\/80,
+.light .bg-\[\#2D0812\]\/70,
+.light .bg-\[\#2D0812\]\/60,
+.light .bg-\[\#2D0812\]\/55,
+.light .bg-\[\#2D0812\]\/50,
+.light [class*="bg-[#2D0812]"],
+.light [class*="bg-[#340B18]"],
+.light [class*="bg-[#25060F]"],
+.light [class*="bg-[#42111E]"],
+[data-theme="light"] [class*="bg-[#2D0812]"],
+[data-theme="light"] [class*="bg-[#340B18]"],
+[data-theme="light"] [class*="bg-[#25060F]"],
+[data-theme="light"] [class*="bg-[#42111E]"] {
+  background-color: #EDE2DF !important;
+  border-color: rgba(138, 106, 28, 0.2) !important;
+}
+
+.light .text-emerald-300 {
+  color: #166534 !important;
+}
+
+.light .bg-\[\#2A0713\],
+.light .bg-\[\#2A0713\]\/60,
+.light .bg-\[\#2A0713\]\/70,
+.light .bg-\[\#2A0713\]\/80,
+.light .bg-\[\#2A0713\]\/90,
+.light [class*="bg-[#2A0713]"],
+[data-theme="light"] [class*="bg-[#2A0713]"] {
+  background-color: #F5EEDC !important;
+  border-color: rgba(138, 106, 28, 0.25) !important;
+}
+
+.light .bg-\[\#12070B\],
+.light .bg-\[\#140207\],
+.light .bg-\[\#1A040A\],
+.light .bg-\[\#1F080F\],
+.light [class*="bg-[#12070B]"],
+.light [class*="bg-[#140207]"],
+.light [class*="bg-[#1A040A]"],
+.light [class*="bg-[#1F080F]"],
+[data-theme="light"] [class*="bg-[#12070B]"],
+[data-theme="light"] [class*="bg-[#140207]"],
+[data-theme="light"] [class*="bg-[#1A040A]"],
+[data-theme="light"] [class*="bg-[#1F080F]"] {
+  background-color: #EDE2DF !important;
+  border-color: rgba(138, 106, 28, 0.2) !important;
+}
+
+/* 6. Active states */
+.light .bg-gold\/20,
+.light .bg-gold\/15,
+.light .bg-gold\/10 {
+  background-color: #F5E4E4 !important;
+  border-color: #7E0F26 !important;
+}
+
+.light .border-gold\/20,
+.light .border-gold\/25,
+.light .border-gold\/30,
+.light .border-gold\/35,
+.light .border-gold\/40,
+.light .border-gold\/50 {
+  border-color: rgba(138, 106, 28, 0.28) !important;
+}
+
+/* Telemetry cells need a stronger hover state on the pale canvas. The dark
+   theme's transparent gold wash is too subtle once the panel is light, so
+   give the active cell a warm glass lift and a crisp edge. */
+.light .system-telemetry-item:hover,
+.light .system-telemetry-item:focus-visible,
+[data-theme="light"] .system-telemetry-item:hover,
+[data-theme="light"] .system-telemetry-item:focus-visible {
+  background: linear-gradient(135deg, rgba(255, 248, 218, 0.98), rgba(245, 228, 228, 0.96)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    inset 0 -1px 0 rgba(126, 15, 38, 0.12),
+    0 0 24px rgba(184, 134, 11, 0.17);
+}
+
+.light .system-telemetry-item:hover .system-telemetry-icon,
+.light .system-telemetry-item:focus-visible .system-telemetry-icon,
+[data-theme="light"] .system-telemetry-item:hover .system-telemetry-icon,
+[data-theme="light"] .system-telemetry-item:focus-visible .system-telemetry-icon {
+  color: #7e0f26 !important;
+  filter: drop-shadow(0 0 6px rgba(126, 15, 38, 0.3));
+}
+
+.light .system-telemetry-item:hover .text-cream,
+.light .system-telemetry-item:focus-visible .text-cream,
+[data-theme="light"] .system-telemetry-item:hover .text-cream,
+[data-theme="light"] .system-telemetry-item:focus-visible .text-cream {
+  color: #2a1015 !important;
+}
+
+/* 7. Modal backdrop and card in light mode */
+.light [role="dialog"] {
+  background-color: #FFFFFF !important;
+  color: #2A1015 !important;
+  border-color: rgba(138, 106, 28, 0.35) !important;
+}
+
+.light input,
+.light textarea,
+[data-theme="light"] input,
+[data-theme="light"] textarea {
+  background-color: #FFFBFA !important;
+  color: #2A1015 !important;
+  border-color: rgba(138, 106, 28, 0.3) !important;
+}
