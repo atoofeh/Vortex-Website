@@ -23,7 +23,6 @@ export const siteConfig = {
     { label: "Technical Capabilities", href: "#capabilities" },
     { label: "Reference Architecture", href: "#pipeline" },
     { label: "Security Model", href: "#security" },
-    { label: "Privacy Policy", href: "#security" },
   ],
   referenceDeployment: {
     badge: "REFERENCE ARCHITECTURE · ILLUSTRATIVE",
