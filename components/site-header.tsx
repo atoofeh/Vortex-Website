@@ -83,7 +83,7 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
       <header className="fixed inset-x-0 top-3.5 z-50 px-4 sm:top-5">
         <div
           className={
-            "mx-auto grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-full border backdrop-blur-xl transition-all duration-150 " +
+            "mx-auto grid w-full grid-cols-[auto_1fr_auto] items-center gap-3 rounded-full border transition-all duration-150 " +
             chromeClass
           }
         >
@@ -161,7 +161,7 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.18 }}
-            className="fixed inset-0 z-40 flex flex-col justify-between gap-8 overflow-y-auto overscroll-contain bg-[#1F050C]/98 px-6 pb-10 pt-28 backdrop-blur-2xl md:hidden"
+            className="fixed inset-0 z-40 flex flex-col justify-between gap-8 overflow-y-auto overscroll-contain bg-[#1F050C] px-6 pb-10 pt-28 md:hidden"
           >
             <div className="flex items-center justify-between border-b border-gold/20 pb-6">
               <Link

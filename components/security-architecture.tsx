@@ -136,7 +136,7 @@ export function SecurityArchitecture() {
           </div>
 
           {/* Layer Deep-Dive Specification Card */}
-          <div className="rounded-3xl border border-gold/30 bg-[#1F050C] p-7 sm:p-10 shadow-[0_20px_50px_rgba(15,2,6,0.7)] lg:col-span-7 backdrop-blur-xl">
+          <div className="rounded-3xl border border-gold/30 bg-[#1F050C] p-7 sm:p-10 shadow-[0_20px_50px_rgba(15,2,6,0.7)] lg:col-span-7">
             <div className="mb-6 flex items-center justify-between gap-4 border-b border-gold/15 pb-4">
               <div className="flex items-center gap-2.5 font-mono text-xs font-bold text-champagne">
                 <Icon size={18} className="text-gold" />

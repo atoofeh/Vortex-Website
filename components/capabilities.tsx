@@ -59,7 +59,7 @@ export function Capabilities({ onOpenModal }: { onOpenModal?: () => void }) {
           })}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-5 rounded-2xl border border-gold/20 bg-[#1F050C]/60 p-6 backdrop-blur-sm sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-5 rounded-2xl border border-gold/20 bg-[#1F050C]/90 p-6 sm:flex-row">
           <p className="text-xs text-muted sm:text-sm">
             Need a custom architectural evaluation for your specific hardware topology?
           </p>

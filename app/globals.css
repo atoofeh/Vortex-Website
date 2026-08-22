@@ -858,14 +858,6 @@ button {
     animation: none !important;
   }
 
-  .backdrop-blur-sm,
-  .backdrop-blur-xl,
-  .backdrop-blur-2xl,
-  .liquid-glass-card {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
-  }
-
   .liquid-glass-card {
     background: rgba(66, 17, 30, 0.92);
   }

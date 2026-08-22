@@ -114,7 +114,7 @@ export function LeadModal({ isOpen, onClose }: LeadModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ duration: 0.3 }}
-            className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-gold/30 bg-[#1F050C] p-7 sm:p-10 shadow-[0_25px_70px_rgba(15,2,6,0.9)] backdrop-blur-2xl my-auto"
+            className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-gold/30 bg-[#1F050C] p-7 sm:p-10 shadow-[0_25px_70px_rgba(15,2,6,0.9)] my-auto"
           >
             {/* Close Button */}
             <button

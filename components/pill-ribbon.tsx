@@ -15,7 +15,7 @@ export function SystemTelemetryRail() {
   return (
     <section className="system-telemetry-rail relative border-y border-gold/20 py-5 sm:py-6" aria-label="System telemetry">
       <div className="section-wrap">
-        <div className="relative overflow-hidden rounded-[1.75rem] border border-gold/25 bg-[#1F050C]/75 p-4 shadow-[0_18px_50px_rgba(15,2,6,0.35)] backdrop-blur-xl sm:p-5">
+        <div className="relative overflow-hidden rounded-[1.75rem] border border-gold/25 bg-[#1F050C]/90 p-4 shadow-[0_18px_50px_rgba(15,2,6,0.35)] sm:p-5">
           <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-gold/10 blur-3xl" />
 
           <div className="relative flex flex-col gap-3 border-b border-gold/15 pb-4 sm:flex-row sm:items-center sm:justify-between">

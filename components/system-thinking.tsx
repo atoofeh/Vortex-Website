@@ -279,7 +279,7 @@ export function SystemThinking() {
           </div>
 
           {/* Illuminated Stage Canvas */}
-          <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-[#1F050C] p-7 shadow-[0_20px_50px_rgba(15,2,6,0.7)] backdrop-blur-2xl sm:p-10">
+          <div className="relative overflow-hidden rounded-3xl border border-gold/30 bg-[#1F050C] p-7 shadow-[0_20px_50px_rgba(15,2,6,0.7)] sm:p-10">
             <div
               aria-hidden="true"
               className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_30%,rgba(212,175,55,0.12),transparent_50%)]"

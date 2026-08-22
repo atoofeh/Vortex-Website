@@ -25,7 +25,7 @@ export function ProofStrip() {
   return (
     <section className="relative py-20 sm:py-28" aria-label="VORTEX operating principles">
       <div className="section-wrap">
-        <div className="rounded-[2rem] border border-gold/20 bg-[#1F050C]/70 p-6 shadow-[0_18px_50px_rgba(15,2,6,0.45)] backdrop-blur-xl sm:p-8 lg:p-10">
+        <div className="rounded-[2rem] border border-gold/20 bg-[#1F050C]/90 p-6 shadow-[0_18px_50px_rgba(15,2,6,0.45)] sm:p-8 lg:p-10">
           <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
             <div>
               <p className="eyebrow mb-4">The VORTEX standard</p>

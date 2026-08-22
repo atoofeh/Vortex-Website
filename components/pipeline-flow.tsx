@@ -31,7 +31,7 @@ export function PipelineFlow() {
             return (
               <div
                 key={stage.step}
-                className="group relative overflow-hidden rounded-2xl border border-gold/20 bg-[#1F050C]/90 p-6 sm:p-8 shadow-[0_10px_30px_rgba(15,2,6,0.4)] backdrop-blur-xl transition-all duration-300 hover:border-gold/45"
+                className="group relative overflow-hidden rounded-2xl border border-gold/20 bg-[#1F050C]/95 p-6 sm:p-8 shadow-[0_10px_30px_rgba(15,2,6,0.4)] transition-all duration-300 hover:border-gold/45"
               >
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">

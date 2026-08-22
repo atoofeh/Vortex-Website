@@ -12,9 +12,9 @@
   isolation: isolate;
   overflow: hidden;
   border-radius: 28px;
+  transform-style: preserve-3d;
+  perspective: 1000px;
   /* Saturation matters: blur alone washes the backdrop toward grey. */
-  -webkit-backdrop-filter: blur(22px) saturate(175%) brightness(1.06);
-  backdrop-filter: blur(22px) saturate(175%) brightness(1.06);
   background: linear-gradient(
     145deg,
     rgba(255, 255, 255, 0.055) 0%,
@@ -89,6 +89,7 @@
 .liquid-glass-content {
   position: relative;
   z-index: 3;
+  transform: translateZ(38px);
 }
 
 .liquid-glass-eyebrow {
@@ -224,8 +225,6 @@
     rgba(255, 255, 255, 0.012) 42%,
     rgba(66, 17, 30, 0.3) 100%
   );
-  -webkit-backdrop-filter: blur(20px) saturate(165%);
-  backdrop-filter: blur(20px) saturate(165%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.13),
     inset 0 -1px 0 rgba(0, 0, 0, 0.2),
@@ -284,8 +283,6 @@
     rgba(255, 255, 255, 0.72) 42%,
     rgba(237, 226, 223, 0.62) 100%
   );
-  -webkit-backdrop-filter: blur(20px) saturate(145%);
-  backdrop-filter: blur(20px) saturate(145%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     inset 0 -1px 0 rgba(45, 8, 18, 0.08),
@@ -333,8 +330,6 @@
 [data-theme="light"] .liquid-glass-card {
   /* More transparency lets the emblem field and paper gradients refract
      through the panel instead of flattening it into a white card. */
-  -webkit-backdrop-filter: blur(26px) saturate(180%) brightness(1.06);
-  backdrop-filter: blur(26px) saturate(180%) brightness(1.06);
   background:
     radial-gradient(90% 80% at 0% 0%, rgba(255, 255, 255, 0.7), transparent 54%),
     linear-gradient(
