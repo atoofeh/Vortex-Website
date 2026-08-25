@@ -10,7 +10,7 @@ type ServiceOption = { key: string; value: string };
 
 const groups: { label: string; items: ServiceOption[] }[] = [
   { label: "aiGroup", items: [{ key: "ai", value: "AI System Development" }, { key: "automation", value: "Intelligent Automation" }] },
-  { label: "softwareGroup", items: [{ key: "website", value: "Website Development" }, { key: "webapp", value: "Web Application" }, { key: "mobile", value: "Mobile Application" }, { key: "custom", value: "Custom Software" }, { key: "enterprise", value: "Enterprise Platform" }, { key: "erp", value: "ERP Development" }] },
+  { label: "softwareGroup", items: [{ key: "website", value: "Website Development" }, { key: "webapp", value: "Web Application" }, { key: "mobile", value: "Mobile Application" }, { key: "custom", value: "Custom Software" }, { key: "enterprise", value: "Enterprise Platform" }, { key: "erp", value: "ERP Development" }, { key: "unsure", value: "Not sure yet" }] },
   { label: "infrastructureGroup", items: [{ key: "cloud", value: "Cloud Architecture" }, { key: "private", value: "Private Infrastructure" }, { key: "devops", value: "DevOps" }, { key: "gpu", value: "GPU Infrastructure" }] },
 ];
 
