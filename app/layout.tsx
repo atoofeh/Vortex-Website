@@ -16,10 +16,15 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
+const siteDescription = "VORTEX engineers private AI infrastructure, intelligent software, enterprise platforms, and digital products from architecture through production.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.vortexmind.co"),
   title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
-  description: siteConfig.thesis,
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/logo-emblem-icon.png", type: "image/png" },
@@ -30,8 +35,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
-    description: siteConfig.thesis,
+    description: siteDescription,
     siteName: siteConfig.fullName,
+    url: "https://www.vortexmind.co",
     images: [
       {
         url: "/Logo.png",
@@ -44,7 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
-    description: siteConfig.thesis,
+    description: siteDescription,
     images: ["/Logo.png"],
   },
 };
@@ -55,7 +61,7 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": "https://www.vortexmind.co/#organization",
-      "name": "VORTEX — AI & IT Solutions",
+      "name": "VORTEX",
       "url": "https://www.vortexmind.co",
       "logo": "https://www.vortexmind.co/Logo.png",
       "description": siteConfig.thesis,

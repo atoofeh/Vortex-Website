@@ -10,7 +10,7 @@ export const translations = {
       architecture: "Architecture",
       about: "About",
       contact: "Contact",
-      book: "Book Consultation",
+      book: "Start a Project",
       menu: "Main navigation",
     },
     hero: {
@@ -129,7 +129,7 @@ export const translations = {
         gpu: "GPU Infrastructure",
       },
     },
-    footer: { location: "Amman, Jordan · Engineering every layer.", capabilities: "Capabilities", architecture: "Architecture", about: "About", email: "Email" },
+    footer: { location: "Engineering from Jordan. Built for anywhere.", capabilities: "Capabilities", architecture: "Architecture", about: "About", email: "Email" },
   },
   ar: {
     language: { english: "English", arabic: "العربية", switchTo: "التبديل إلى الإنجليزية" },

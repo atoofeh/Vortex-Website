@@ -11,7 +11,11 @@ export function generateStaticParams() { return slugs.map((slug) => ({ slug }));
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const title = slug.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
-  return { title: `${title} | VORTEX AI & IT Solutions`, description: `VORTEX engineering for ${title.toLowerCase()}, private infrastructure, and production systems.` };
+  return {
+    title: `${title} | VORTEX`,
+    description: `VORTEX engineering for ${title.toLowerCase()}, private infrastructure, and production systems.`,
+    alternates: { canonical: `/services/${slug}` },
+  };
 }
 
 export default async function ServiceRoute({ params }: { params: Promise<{ slug: string }> }) {

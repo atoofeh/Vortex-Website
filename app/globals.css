@@ -1042,6 +1042,28 @@ button {
   .liquid-glass-card {
     background: rgba(66, 17, 30, 0.92);
   }
+
+  #build article,
+  #build article.capability-card--priority {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 639px) {
+  #contact > div {
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @keyframes star-shimmer {

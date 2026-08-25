@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: "VORTEX",
-  fullName: "VORTEX — AI & IT Solutions",
-  tagline: "Private AI & Sovereign Infrastructure",
+  fullName: "VORTEX",
+  tagline: "AI Infrastructure, Intelligent Software & Technology Engineering",
   headline: "Intelligence without boundaries",
   subheadline: "Private AI. Autonomous systems. Sovereign infrastructure.",
   thesis:
     "VORTEX builds the private computing fabrics that let an organisation run AI on its own hardware, inside its own perimeter, under its own control.",
-  primaryCta: "Request Architecture Assessment",
+  primaryCta: "Start a Project",
   primaryCtaHref: "#contact",
   secondaryCta: "Explore Technical Blueprint",
   secondaryCtaHref: "#architecture",
