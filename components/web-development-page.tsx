@@ -29,6 +29,8 @@ import {
 } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
+import { useLanguage } from "@/components/language-provider";
+import { WebDevelopmentArabic } from "@/components/web-development-arabic";
 
 type IconComponent = typeof Globe2;
 
@@ -119,9 +121,11 @@ const fadeUp = (reducedMotion: boolean | null, delay = 0) => ({
 });
 
 export function WebDevelopmentPage() {
+  const { locale } = useLanguage();
   const reducedMotion = useReducedMotion();
   const [activeLayer, setActiveLayer] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
+  if (locale === "ar") return <WebDevelopmentArabic />;
   const currentLayer = stackLayers[activeLayer];
   const currentStep = processSteps[activeStep];
   const ActiveLayerIcon = currentLayer.icon;

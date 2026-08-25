@@ -4,7 +4,10 @@ export const runtime = "nodejs";
 
 type AssessmentPayload = {
   serviceType?: string;
+  stage?: string;
+  needs?: string[];
   solutionDescription?: string;
+  timeline?: string;
   name?: string;
   email?: string;
   company?: string;
@@ -30,12 +33,15 @@ export async function POST(request: Request) {
   }
 
   const serviceType = clean(payload.serviceType, 160);
+  const stage = clean(payload.stage, 120);
+  const needs = Array.isArray(payload.needs) ? payload.needs.filter((item): item is string => typeof item === "string").map((item) => clean(item, 120)).slice(0, 12) : [];
   const solutionDescription = clean(payload.solutionDescription, 5000);
+  const timeline = clean(payload.timeline, 120);
   const name = clean(payload.name, 120);
   const email = clean(payload.email, 254);
   const company = clean(payload.company, 200);
 
-  if (!serviceType || !solutionDescription || !name || !email || !email.includes("@")) {
+  if (!serviceType || !stage || !needs.length || !solutionDescription || !timeline || !name || !email || !email.includes("@")) {
     return Response.json({ error: "Please complete all required fields." }, { status: 400 });
   }
 
@@ -46,6 +52,9 @@ export async function POST(request: Request) {
     `Work email: ${email}`,
     `Company: ${company || "Not provided"}`,
     `Requested service: ${serviceType}`,
+    `Project stage: ${stage || "Not provided"}`,
+    `Needs: ${needs.length ? needs.join(", ") : "Not provided"}`,
+    `Timeline: ${timeline || "Not provided"}`,
     "",
     "Solution brief:",
     solutionDescription,

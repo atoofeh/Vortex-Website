@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { MarketingFooter, MarketingHome } from "@/components/marketing-home";
 import { SiteHeader } from "@/components/site-header";
 
-const LeadModal = dynamic(() => import("@/components/lead-modal").then((module) => module.LeadModal), { ssr: false });
+const LeadModal = dynamic(() => import("@/components/guided-lead-modal").then((module) => module.GuidedLeadModal), { ssr: false });
 
 export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);

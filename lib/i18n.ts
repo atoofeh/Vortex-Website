@@ -84,8 +84,8 @@ export const translations = {
     },
     closing: {
       eyebrow: "Direct engineering engagement",
-      title: "Ready to build your intelligence infrastructure?",
-      description: "Direct engineering collaboration with the team designing the infrastructure, intelligence, and software behind your next system.",
+      title: "Ready to engineer your next system?",
+      description: "Work directly with the team designing the experience, software, intelligence, data, and infrastructure behind it.",
       primary: "Start a Project",
       secondary: "Explore Capabilities",
       status: "Private perimeter · Ready for the next system",
