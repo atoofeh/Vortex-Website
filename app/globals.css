@@ -265,6 +265,19 @@ html[dir="rtl"] textarea {
 }
 
 @media (max-width: 767px) {
+  #main-content h1 {
+    max-width: 100%;
+    font-size: clamp(2.7rem, 13.5vw, 4.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  html[lang="ar"] #main-content h1 {
+    font-size: clamp(2.55rem, 12vw, 4.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+  }
+
   #build > .section-wrap > .grid {
     grid-template-columns: minmax(0, 1fr);
   }
