@@ -42,13 +42,32 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
   const reducedMotion = useReducedMotion();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const scrollFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      if (scrollFrameRef.current !== null) return;
+      scrollFrameRef.current = window.requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 24);
+        scrollFrameRef.current = null;
+      });
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (scrollFrameRef.current !== null) window.cancelAnimationFrame(scrollFrameRef.current);
+    };
   }, []);
+
+  useEffect(() => {
+    if (!capabilitiesOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setCapabilitiesOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [capabilitiesOpen]);
 
   useEffect(() => {
     if (!open) return;
@@ -76,9 +95,9 @@ export function SiteHeader({ onOpenModal }: { onOpenModal?: () => void }) {
 
           <nav aria-label={t("navigation.menu")} className="site-header-nav hidden items-center gap-1 md:flex">
             <div className="relative" onMouseEnter={() => setCapabilitiesOpen(true)} onMouseLeave={() => setCapabilitiesOpen(false)}>
-              <button type="button" aria-haspopup="true" aria-expanded={capabilitiesOpen} onClick={() => setCapabilitiesOpen((current) => !current)} className="focus-ring link-underline inline-flex items-center gap-1 rounded-full px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-muted hover:text-champagne">{t("navigation.capabilities")} <ChevronDown aria-hidden="true" size={12} className={capabilitiesOpen ? "rotate-180 transition-transform" : "transition-transform"} /></button>
+              <button type="button" id="capabilities-menu-trigger" aria-haspopup="true" aria-expanded={capabilitiesOpen} aria-controls="capabilities-menu" onClick={() => setCapabilitiesOpen((current) => !current)} className="focus-ring link-underline inline-flex items-center gap-1 rounded-full px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-muted hover:text-champagne">{t("navigation.capabilities")} <ChevronDown aria-hidden="true" size={12} className={capabilitiesOpen ? "rotate-180 transition-transform" : "transition-transform"} /></button>
               <AnimatePresence>
-                {capabilitiesOpen && <motion.div role="menu" initial={reducedMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute start-0 top-full mt-3 grid w-[38rem] grid-cols-2 gap-3 rounded-2xl border border-gold/25 bg-[#1F050C]/95 p-4 shadow-[0_20px_60px_rgba(15,2,6,0.65)] backdrop-blur-xl">{capabilityGroups.map((group) => <div key={group.label} className="rounded-xl border border-gold/10 bg-[#2D0812]/25 p-2"><p className="px-3 pb-2 pt-1 font-mono text-[0.58rem] font-bold uppercase tracking-[0.14em] text-gold">{group.label}</p>{group.links.map(([labelKey, href, descriptionKey]) => <Link key={href} role="menuitem" href={href} className="focus-ring group block rounded-xl p-3 hover:bg-gold/10"><span className="block text-xs font-semibold text-cream group-hover:text-champagne">{t(`${labelKey}.title`)}</span><span className="mt-1 block text-[0.67rem] leading-relaxed text-muted">{t(descriptionKey)}</span></Link>)}</div>)}</motion.div>}
+                {capabilitiesOpen && <motion.div id="capabilities-menu" role="menu" aria-labelledby="capabilities-menu-trigger" initial={reducedMotion ? false : { opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} className="absolute start-0 top-full mt-3 grid w-[38rem] grid-cols-2 gap-3 rounded-2xl border border-gold/25 bg-[#1F050C]/95 p-4 shadow-[0_20px_60px_rgba(15,2,6,0.65)] backdrop-blur-xl">{capabilityGroups.map((group) => <div key={group.label} className="rounded-xl border border-gold/10 bg-[#2D0812]/25 p-2"><p className="px-3 pb-2 pt-1 font-mono text-[0.58rem] font-bold uppercase tracking-[0.14em] text-gold">{group.label}</p>{group.links.map(([labelKey, href, descriptionKey]) => <Link key={href} role="menuitem" href={href} className="focus-ring group block rounded-xl p-3 hover:bg-gold/10"><span className="block text-xs font-semibold text-cream group-hover:text-champagne">{t(`${labelKey}.title`)}</span><span className="mt-1 block text-[0.67rem] leading-relaxed text-muted">{t(descriptionKey)}</span></Link>)}</div>)}</motion.div>}
               </AnimatePresence>
             </div>
             <Link href="/#architecture" className="link-underline focus-ring rounded-full px-3 py-1.5 font-mono text-[0.66rem] uppercase tracking-[0.12em] text-muted hover:text-champagne">{t("navigation.architecture")}</Link>
