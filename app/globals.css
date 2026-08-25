@@ -252,6 +252,18 @@ html[dir="rtl"] textarea {
   min-height: 28rem;
 }
 
+#build article.capability-card--priority {
+  min-height: 32rem;
+  border-color: rgba(212, 175, 55, 0.42);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.018) 44%, rgba(66, 17, 30, 0.4)),
+    rgba(45, 8, 18, 0.58);
+}
+
+#build article:not(.capability-card--priority) {
+  min-height: 26rem;
+}
+
 @media (max-width: 767px) {
   #build > .section-wrap > .grid {
     grid-template-columns: minmax(0, 1fr);
