@@ -113,7 +113,14 @@ html[lang="ar"] body {
 html[lang="ar"] .display {
   font-family: var(--font-arabic), var(--font-display), sans-serif;
   font-weight: 700;
-  letter-spacing: -0.035em;
+  letter-spacing: normal;
+  line-height: 1.12;
+}
+
+html[lang="ar"] .font-display {
+  font-family: var(--font-arabic), var(--font-display), sans-serif;
+  letter-spacing: normal;
+  line-height: 1.2;
 }
 
 html[lang="ar"] .eyebrow,
@@ -123,6 +130,10 @@ html[lang="ar"] .font-mono {
 
 html[dir="rtl"] .link-underline::after {
   transform-origin: right;
+}
+
+.vortex-brand {
+  direction: ltr;
 }
 
 html[dir="rtl"] .hero-phrase-rule {
@@ -1477,8 +1488,23 @@ button {
 }
 
 .vortex-stack-responsibilities__index {
+  flex: 0 0 1.35rem;
   color: rgba(229, 195, 120, 0.62);
   font: 600 0.62rem/1 "IBM Plex Mono", ui-monospace, monospace;
+}
+
+#architecture .vortex-stack-responsibilities li {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+#architecture .vortex-stack-responsibilities strong {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .vortex-stack-cta {
@@ -1556,5 +1582,60 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .vortex-stack-cta::after {
     transition: none;
+  }
+}
+
+/* Keep the architecture instrument in the same visual field as the page.
+   The content should not look like a second card inside the console. */
+#architecture .vortex-stack-console,
+#architecture .vortex-stack-console:hover {
+  border-color: rgba(212, 175, 55, 0.28);
+  background:
+    linear-gradient(145deg, rgba(82, 27, 39, 0.28), rgba(42, 5, 14, 0.18) 52%, rgba(52, 7, 18, 0.24)),
+    rgba(31, 5, 12, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 239, 206, 0.045), 0 18px 48px rgba(15, 2, 6, 0.16);
+  transform: none;
+}
+
+#architecture .vortex-stack-console__body,
+#architecture .vortex-stack-console__body:focus,
+#architecture .vortex-stack-console__body:focus-visible {
+  outline: none;
+  background: transparent;
+}
+
+#architecture .vortex-stack-active {
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  padding: clamp(2.25rem, 5vw, 4rem);
+  border: 1px solid rgba(212, 175, 55, 0.24);
+  background: linear-gradient(145deg, rgba(82, 27, 39, 0.22), rgba(31, 5, 12, 0.08));
+}
+
+#architecture .vortex-stack-responsibility-panel {
+  min-width: 0;
+  padding: clamp(1.25rem, 2.5vw, 2.25rem);
+}
+
+#architecture .vortex-stack-responsibility-panel,
+#architecture .vortex-stack-responsibility-panel:hover {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025) 60%, transparent),
+    rgba(255, 255, 255, 0.035);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 36px rgba(15, 2, 6, 0.12);
+}
+
+@media (max-width: 767px) {
+  #architecture .vortex-stack-active {
+    min-height: 15rem;
+    align-items: flex-start;
+    padding: 2rem 1.75rem;
+  }
+
+  #architecture .vortex-stack-responsibility-panel {
+    padding: 1.25rem 1.75rem;
   }
 }

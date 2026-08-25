@@ -4,10 +4,12 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { MarketingFooter, MarketingHome } from "@/components/marketing-home";
 import { SiteHeader } from "@/components/site-header";
+import { useLanguage } from "@/components/language-provider";
 
-const LeadModal = dynamic(() => import("@/components/guided-lead-modal").then((module) => module.GuidedLeadModal), { ssr: false });
+const LeadModal = dynamic(() => import("@/components/lead-modal").then((module) => module.LeadModal), { ssr: false });
 
 export default function Home() {
+  const { locale } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | undefined>();
 
@@ -27,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <a href="#main-content" className="focus-ring sr-only fixed start-4 top-4 z-[80] rounded-full bg-gold px-4 py-2 text-sm font-bold text-ink focus:not-sr-only">Skip to content</a>
+      <a href="#main-content" aria-label={locale === "ar" ? "انتقل إلى المحتوى" : "Skip to content"} className="focus-ring sr-only fixed start-4 top-4 z-[80] rounded-full bg-gold px-4 py-2 text-sm font-bold text-ink focus:not-sr-only">{locale === "ar" ? "انتقل إلى المحتوى" : "Skip to content"}</a>
       <SiteHeader onOpenModal={() => openModal()} />
       <div className="page-shell"><MarketingHome onOpenModal={openModal} /><MarketingFooter /></div>
       <LeadModal isOpen={modalOpen} initialService={selectedService} onClose={() => setModalOpen(false)} />

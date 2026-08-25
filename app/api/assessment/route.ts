@@ -41,7 +41,7 @@ export async function POST(request: Request) {
   const email = clean(payload.email, 254);
   const company = clean(payload.company, 200);
 
-  if (!serviceType || !stage || !needs.length || !solutionDescription || !timeline || !name || !email || !email.includes("@")) {
+  if (!serviceType || !solutionDescription || !name || !email || !email.includes("@")) {
     return Response.json({ error: "Please complete all required fields." }, { status: 400 });
   }
 
@@ -52,9 +52,9 @@ export async function POST(request: Request) {
     `Work email: ${email}`,
     `Company: ${company || "Not provided"}`,
     `Requested service: ${serviceType}`,
-    `Project stage: ${stage || "Not provided"}`,
-    `Needs: ${needs.length ? needs.join(", ") : "Not provided"}`,
-    `Timeline: ${timeline || "Not provided"}`,
+    ...(stage ? [`Project stage: ${stage}`] : []),
+    ...(needs.length ? [`Needs: ${needs.join(", ")}`] : []),
+    ...(timeline ? [`Timeline: ${timeline}`] : []),
     "",
     "Solution brief:",
     solutionDescription,
