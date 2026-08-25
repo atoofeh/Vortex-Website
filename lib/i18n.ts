@@ -9,6 +9,7 @@ export const translations = {
       capabilities: "Capabilities",
       architecture: "Architecture",
       about: "About",
+      contact: "Contact",
       book: "Book Consultation",
       menu: "Main navigation",
     },
@@ -132,7 +133,7 @@ export const translations = {
   },
   ar: {
     language: { english: "English", arabic: "العربية", switchTo: "التبديل إلى الإنجليزية" },
-    navigation: { capabilities: "القدرات", architecture: "الهندسة المعمارية", about: "من نحن", book: "احجز استشارة", menu: "التنقل الرئيسي" },
+    navigation: { capabilities: "القدرات", architecture: "الهندسة المعمارية", about: "من نحن", contact: "تواصل معنا", book: "احجز استشارة", menu: "التنقل الرئيسي" },
     hero: {
       eyebrow: "ذكاء سيادي",
       title: "ذكاء اصطناعي سيادي. مصمم داخل محيطك.",

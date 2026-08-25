@@ -46,7 +46,8 @@ export function LeadModal({ isOpen, onClose, initialService }: LeadModalProps) {
     const request: AssessmentRequest = { serviceType: selectedService, solutionDescription: description.trim(), name: name.trim(), email: email.trim(), company: company.trim(), submittedAt: new Date().toISOString() };
     try {
       const response = await fetch("/api/assessment", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(request) });
-      if (!response.ok) throw new Error("The request could not be delivered.");
+      const result = await response.json().catch(() => null) as { error?: string } | null;
+      if (!response.ok) throw new Error(result?.error || "The request could not be delivered.");
       setSubmitted(true);
     } catch (submissionError) { setError(submissionError instanceof Error ? submissionError.message : "The request could not be delivered."); } finally { setIsSubmitting(false); }
   };
