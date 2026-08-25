@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { Cairo, Geist, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/site-content";
 import { ThemeProvider } from "@/components/theme-provider";
 import { VortexEmblemField } from "@/components/vortex-emblem-field";
+import { LanguageProvider } from "@/components/language-provider";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 const displayFont = Playfair_Display({ subsets: ["latin"], variable: "--font-display", weight: ["400", "500", "600", "700"], display: "swap" });
+const arabicFont = Cairo({ subsets: ["arabic"], variable: "--font-arabic", weight: ["400", "500", "600", "700"], display: "swap" });
 
 export const viewport: Viewport = {
   themeColor: "#1F050C",
@@ -83,7 +85,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} ${displayFont.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${displayFont.variable} ${arabicFont.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -92,8 +94,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className="font-sans antialiased selection:bg-[#D4AF37] selection:text-[#1F050C]">
         <ThemeProvider>
-          <VortexEmblemField />
-          {children}
+          <LanguageProvider>
+            <VortexEmblemField />
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -138,6 +138,16 @@
   transform: translateZ(38px);
 }
 
+.liquid-glass-card {
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  backdrop-filter: blur(18px) saturate(125%);
+}
+
+.liquid-glass-card > :not([aria-hidden="true"]) {
+  position: relative;
+  z-index: 3;
+}
+
 .liquid-glass-eyebrow {
   color: var(--champagne);
   font-family: var(--font-mono), monospace;
