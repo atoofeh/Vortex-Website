@@ -1347,3 +1347,214 @@ button {
     animation: none;
   }
 }
+
+/* Quiet the console so the stack reads as architecture first and interface second. */
+.vortex-stack-console {
+  padding: clamp(1.25rem, 2.8vw, 2rem);
+  border-color: rgba(212, 175, 55, 0.34);
+  background:
+    radial-gradient(circle at 86% 18%, rgba(212, 175, 55, 0.1), transparent 25%),
+    linear-gradient(145deg, rgba(82, 27, 39, 0.9), rgba(42, 5, 14, 0.97) 52%, rgba(52, 7, 18, 0.96));
+  backdrop-filter: blur(14px);
+}
+
+.vortex-stack-console::after {
+  display: none;
+}
+
+.vortex-stack-console__topline {
+  color: rgba(229, 195, 120, 0.72);
+  font-size: 0.68rem;
+}
+
+.vortex-stack-console__header {
+  margin-top: 1.15rem;
+  padding-bottom: 1rem;
+}
+
+.vortex-stack-path {
+  min-height: 9.35rem;
+}
+
+.vortex-stack-path__line {
+  top: 2.52rem;
+  right: 8%;
+  left: 8%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.48) 12%, rgba(212, 175, 55, 0.48) 88%, transparent);
+}
+
+.vortex-stack-path__foundation {
+  position: absolute;
+  right: 8%;
+  bottom: 0.5rem;
+  left: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.32) 12%, rgba(212, 175, 55, 0.32) 88%, transparent);
+}
+
+.vortex-stack-signal {
+  display: none;
+}
+
+.vortex-stack-node {
+  gap: 0.52rem;
+  padding: 0 0.25rem;
+}
+
+.vortex-stack-node::after {
+  position: absolute;
+  top: 3.65rem;
+  left: 50%;
+  width: 1px;
+  height: 4.85rem;
+  background: linear-gradient(rgba(212, 175, 55, 0.28), rgba(212, 175, 55, 0.08));
+  content: "";
+  pointer-events: none;
+}
+
+.vortex-stack-node__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  background: rgba(31, 5, 12, 0.76);
+}
+
+.vortex-stack-node.is-inspected .vortex-stack-node__icon {
+  border-color: rgba(229, 195, 120, 0.82);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.06), 0 0 18px rgba(212, 175, 55, 0.2);
+}
+
+.vortex-stack-node.is-selected .vortex-stack-node__icon {
+  border-color: rgba(229, 195, 120, 0.92);
+  background: rgba(212, 175, 55, 0.18);
+  color: #fff4e8;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.07), 0 0 18px rgba(212, 175, 55, 0.2);
+}
+
+.vortex-stack-node.is-selected .vortex-stack-node__index {
+  color: #e5c378;
+}
+
+.vortex-stack-console__body {
+  padding-top: 2.25rem;
+}
+
+.vortex-stack-active {
+  min-height: 12rem;
+}
+
+.vortex-stack-number {
+  position: absolute;
+  top: -0.9rem;
+  left: -0.45rem;
+  z-index: 0;
+  color: rgba(212, 175, 55, 0.07);
+  font-size: clamp(6rem, 10vw, 8.5rem);
+  line-height: 0.75;
+  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.22);
+  text-shadow: none;
+}
+
+.vortex-stack-responsibilities {
+  border: 0;
+}
+
+.vortex-stack-responsibilities li {
+  min-height: 3.35rem;
+  grid-template-columns: 1.35rem minmax(0, 1fr) auto;
+  border-bottom-color: rgba(212, 175, 55, 0.12);
+  padding: 0.72rem 0.15rem;
+}
+
+.vortex-stack-responsibilities li:hover {
+  padding-right: 0.45rem;
+  padding-left: 0.45rem;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.07), transparent);
+}
+
+.vortex-stack-responsibilities strong {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.vortex-stack-responsibilities__index {
+  color: rgba(229, 195, 120, 0.62);
+  font: 600 0.62rem/1 "IBM Plex Mono", ui-monospace, monospace;
+}
+
+.vortex-stack-cta {
+  position: relative;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.42);
+}
+
+.vortex-stack-cta::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: #e5c378;
+  content: "";
+  transform: scaleX(0.22);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+
+.vortex-stack-cta:hover::after,
+.vortex-stack-cta:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.vortex-stack-geometry {
+  top: -1rem;
+  right: -6rem;
+  width: min(74%, 34rem);
+  opacity: 0.1;
+}
+
+@media (max-width: 639px) {
+  .vortex-stack-console__topline {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .vortex-stack-path {
+    min-height: 0;
+  }
+
+  .vortex-stack-path__line {
+    top: 1.2rem;
+    right: auto;
+    bottom: 1.2rem;
+    left: 3.42rem;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.48) 10%, rgba(212, 175, 55, 0.48) 90%, transparent);
+  }
+
+  .vortex-stack-path__foundation,
+  .vortex-stack-node::after {
+    display: none;
+  }
+
+  .vortex-stack-node {
+    display: grid;
+    grid-template-columns: 2rem 2.75rem minmax(0, 1fr);
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.2rem 0;
+    text-align: start;
+  }
+
+  .vortex-stack-node__index { text-align: right; }
+  .vortex-stack-node__label { font-size: 0.84rem; }
+  .vortex-stack-node.is-inspected { transform: translateX(3px); }
+  .vortex-stack-geometry { top: 2rem; right: -9rem; width: 125%; opacity: 0.08; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vortex-stack-cta::after {
+    transition: none;
+  }
+}
