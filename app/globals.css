@@ -1628,6 +1628,19 @@ button {
     0 16px 36px rgba(15, 2, 6, 0.12);
 }
 
+html.light #architecture .vortex-stack-responsibility-panel,
+html.light #architecture .vortex-stack-responsibility-panel:hover,
+.light-mode #architecture .vortex-stack-responsibility-panel,
+.light-mode #architecture .vortex-stack-responsibility-panel:hover,
+[data-theme="light"] #architecture .vortex-stack-responsibility-panel,
+[data-theme="light"] #architecture .vortex-stack-responsibility-panel:hover {
+  background: #f3e9e6 !important;
+  border-color: rgba(138, 106, 28, 0.24) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 16px 36px rgba(42, 16, 21, 0.1) !important;
+}
+
 @media (max-width: 767px) {
   #architecture .vortex-stack-active {
     min-height: 15rem;
