@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { ArrowRight, BrainCircuit, Check, CloudCog, Code2, Cpu, Database, Globe2, Layers3, Network, Server, Smartphone, Sparkles, Workflow, Zap } from "lucide-react";
+import { ArrowRight, BrainCircuit, Check, CloudCog, Code2, Cpu, Database, Globe2, Instagram, Layers3, Linkedin, Network, Server, Smartphone, Sparkles, Workflow, Zap } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { DeploymentRotator } from "@/components/deployment-rotator";
 import { EngineeringStack } from "@/components/engineering-stack";
@@ -40,6 +40,7 @@ const footerNavigation = {
     build: "Build with VORTEX",
     engineering: "Engineering",
     start: "Start a Project",
+    social: "Follow VORTEX",
     ariaCapabilities: "Capability navigation",
     ariaCompany: "Company navigation",
     links: ["Private AI & Intelligence", "Enterprise Platforms", "Digital Experiences", "Mobile Engineering", "Automation & Integration", "Infrastructure"],
@@ -49,6 +50,7 @@ const footerNavigation = {
     build: "نبني مع VORTEX",
     engineering: "الهندسة",
     start: "ابدأ مشروعاً",
+    social: "تابع VORTEX",
     ariaCapabilities: "تصفح القدرات",
     ariaCompany: "تصفح الشركة",
     links: ["الذكاء الاصطناعي الخاص والذكاء", "المنصات المؤسسية", "التجارب الرقمية", "هندسة الجوال", "الأتمتة والتكامل", "البنية التحتية"],
@@ -110,5 +112,5 @@ export function MarketingFooter() {
     ["/services/automation", footer.links[4]],
     ["/services/infrastructure", footer.links[5]],
   ] as const;
-  return <footer className="section-wrap grid gap-10 border-t border-gold/15 py-12 text-xs text-muted sm:grid-cols-[0.8fr_1.2fr] sm:items-start"><div className="flex items-center gap-3.5"><div aria-hidden="true" className="grid h-10 w-10 place-items-center rounded-full border border-gold/30 bg-gold/10 text-gold"><Sparkles size={18} /></div><div><p className="text-sm font-bold tracking-tight text-cream">VORTEX</p><p className="mt-1 text-muted/70">{t("footer.location")}</p></div></div><div className="grid gap-8 sm:grid-cols-2"><nav aria-label={footer.ariaCapabilities} className="flex flex-col items-start gap-3"><p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gold">{footer.capabilities}</p>{capabilityLinks.map(([href, label]) => <Link key={href} href={href} className="focus-ring rounded-sm hover:text-champagne">{label}</Link>)}</nav><nav aria-label={footer.ariaCompany} className="flex flex-col items-start gap-3"><p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gold">{footer.build}</p><Link href="/engineering" className="focus-ring rounded-sm hover:text-champagne">{footer.engineering}</Link><Link href="/#architecture" className="focus-ring rounded-sm hover:text-champagne">{t("footer.architecture")}</Link><Link href="/#about" className="focus-ring rounded-sm hover:text-champagne">{t("footer.about")}</Link><Link href="/#contact" className="focus-ring rounded-sm hover:text-champagne">{footer.start}</Link><a href="mailto:contact@vortexmind.co" className="focus-ring rounded-sm hover:text-champagne">{t("footer.email")}</a></nav></div></footer>;
+  return <footer className="section-wrap grid gap-10 border-t border-gold/15 py-12 text-xs text-muted sm:grid-cols-[0.8fr_1.2fr] sm:items-start"><div className="flex items-center gap-3.5"><div aria-hidden="true" className="grid h-10 w-10 place-items-center rounded-full border border-gold/30 bg-gold/10 text-gold"><Sparkles size={18} /></div><div><p className="text-sm font-bold tracking-tight text-cream">VORTEX</p><p className="mt-1 text-muted/70">{t("footer.location")}</p></div></div><div className="grid gap-8 sm:grid-cols-2"><nav aria-label={footer.ariaCapabilities} className="flex flex-col items-start gap-3"><p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gold">{footer.capabilities}</p>{capabilityLinks.map(([href, label]) => <Link key={href} href={href} className="focus-ring rounded-sm hover:text-champagne">{label}</Link>)}</nav><nav aria-label={footer.ariaCompany} className="flex flex-col items-start gap-3"><p className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.14em] text-gold">{footer.build}</p><Link href="/engineering" className="focus-ring rounded-sm hover:text-champagne">{footer.engineering}</Link><Link href="/#architecture" className="focus-ring rounded-sm hover:text-champagne">{t("footer.architecture")}</Link><Link href="/#about" className="focus-ring rounded-sm hover:text-champagne">{t("footer.about")}</Link><Link href="/#contact" className="focus-ring rounded-sm hover:text-champagne">{footer.start}</Link><a href="mailto:contact@vortexmind.co" className="focus-ring rounded-sm hover:text-champagne">{t("footer.email")}</a><div className="mt-2 flex flex-wrap items-center gap-3 border-t border-gold/15 pt-3"><span className="font-mono text-[0.58rem] font-bold uppercase tracking-[0.14em] text-gold">{footer.social}</span><a href="https://www.instagram.com/vortexmindtech?igsi=cXRib3Bnajd2OGwx" target="_blank" rel="noreferrer" aria-label="Instagram" className="focus-ring rounded-full text-muted hover:text-champagne"><Instagram size={16} /></a><a href="https://www.linkedin.com/company/vortexmind/home" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="focus-ring rounded-full text-muted hover:text-champagne"><Linkedin size={16} /></a></div></nav></div></footer>;
 }
