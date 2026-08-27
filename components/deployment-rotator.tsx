@@ -27,7 +27,7 @@ export function DeploymentRotator() {
           animate={{ opacity: 1, y: 0 }}
           exit={reducedMotion ? undefined : { opacity: 0, y: -8 }}
           transition={{ duration: 0.28 }}
-          className="text-champagne"
+          className="text-gold"
         >
           {deployments[index]}
         </motion.span>

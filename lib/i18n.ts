@@ -20,7 +20,7 @@ export const translations = {
       rotatorLabel: "Deployment patterns",
       deployments: ["air-gapped clusters", "on-premise inference", "private RAG over internal data", "sovereign model hosting"],
       description: "VORTEX builds the private AI infrastructure—and the software that runs on it—end to end.",
-      bridge: "From infrastructure to interface: the systems behind modern businesses.",
+      bridge: "AI where it creates value. Engineering everywhere else.",
       primary: "Start a Project",
       secondary: "Explore Capabilities",
       strip: "AI Infrastructure · Intelligent Software · Web · Mobile · Enterprise Systems",

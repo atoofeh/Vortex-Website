@@ -79,7 +79,6 @@ export function MarketingHome({ onOpenModal }: { onOpenModal: BookingHandler }) 
               <button type="button" onClick={() => onOpenModal()} className="focus-ring flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold via-champagne to-gold px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-ink shadow-[0_0_25px_rgba(212,175,55,0.35)] hover:brightness-110"><Sparkles size={14} />{t("hero.primary")}</button>
               <a href="#build" className="link-underline focus-ring flex items-center gap-2 py-2 text-sm font-semibold text-champagne hover:text-cream">{t("hero.secondary")}<ArrowRight size={14} /></a>
             </div>
-            <div className="mt-14 flex max-w-4xl flex-wrap gap-x-5 gap-y-3 border-t border-gold/15 pt-5 font-mono text-[0.62rem] font-bold uppercase tracking-[0.12em] text-muted"><span className="text-gold">/</span>{t("hero.strip")}</div>
           </motion.div>
         </div>
       </section>

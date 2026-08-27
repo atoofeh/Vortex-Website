@@ -31,6 +31,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/components/language-provider";
 import { WebDevelopmentArabic } from "@/components/web-development-arabic";
+import { LayerSignature } from "@/components/service-identity";
 
 type IconComponent = typeof Globe2;
 
@@ -143,6 +144,7 @@ export function WebDevelopmentPage() {
               <p className="eyebrow mb-5"><Globe2 aria-hidden="true" size={13} className="text-gold" /> Digital experiences</p>
               <h1 className="display max-w-4xl text-[clamp(3rem,8vw,7.2rem)] leading-[0.88] text-cream">Digital experiences engineered to perform.</h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">VORTEX combines product design, frontend engineering, backend systems, and infrastructure to create fast, scalable, visually exceptional digital products.</p>
+              <div className="mt-8 max-w-2xl"><LayerSignature slug="web-development" /></div>
               <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                 <Link href="/?service=Website%20Development#contact" className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold via-champagne to-gold px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-ink shadow-[0_0_25px_rgba(212,175,55,0.35)] hover:brightness-110">Start a Web Project <ArrowRight aria-hidden="true" size={14} /></Link>
                 <Link href="/#build" className="focus-ring inline-flex items-center gap-2 rounded-sm py-2 text-sm font-semibold text-champagne hover:text-cream">Explore capabilities <ArrowRight aria-hidden="true" size={14} /></Link>
