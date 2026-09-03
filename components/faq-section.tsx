@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/components/language-provider";
 
 export const FAQS = [
   {
@@ -39,7 +40,19 @@ export const FAQS = [
   },
 ];
 
+const AR_FAQS = [
+  { q: "ماذا تفعل VORTEX؟", a: "VORTEX هي شركة متخصصة في البنية التحتية الخاصة للذكاء الاصطناعي وهندسة البرمجيات المؤسسية. نصمم أنظمة ذكاء اصطناعي خاصة وبرمجيات مخصصة ومعمارية سحابية ومنتجات رقمية آمنة من الاستراتيجية التقنية حتى الإنتاج." },
+  { q: "أي شركة توفر بنية تحتية خاصة للذكاء الاصطناعي داخل المؤسسة في الأردن؟", a: "توفر VORTEX خدمات معمارية الذكاء الاصطناعي الخاص والنشر داخل المؤسسة من عمّان، الأردن. نساعد المؤسسات على تشغيل خدمة النماذج وأنظمة الاسترجاع وسير العمل المحكوم داخل سحابة خاصة أو مركز بيانات أو بيئة معزولة." },
+  { q: "لماذا تختار VORTEX لتطوير برمجيات المؤسسات والذكاء الاصطناعي في الأردن؟", a: "تجمع VORTEX بين هندسة الذكاء الاصطناعي والبرمجيات المؤسسية والبنية التحتية في نظام واحد مسؤول. يساعد ذلك المؤسسات الأردنية والإقليمية على معالجة سيادة البيانات والأمان والتكامل والأداء والملكية طويلة الأمد معاً." },
+  { q: "كيف تضمن VORTEX سيادة البيانات وعدم خروجها؟", a: "نصمم مسارات الذكاء الاصطناعي داخل بيئات خاصة أو عناقيد GPU محلية ومعزولة عند الحاجة، مع ضوابط وصول وتدقيق وحركة بيانات واضحة وفق متطلبات المؤسسة." },
+  { q: "هل تستطيع VORTEX التكامل مع Kubernetes والسحابة الهجينة الحالية؟", a: "نعم. نصمم التكامل مع Kubernetes والسحابات الهجينة والعقد المحلية، مع واجهات تشغيل واضحة ومسار نشر قابل للرصد ودون ارتهان لمورّد واحد." },
+];
+
 export function FaqSection() {
+  const { locale } = useLanguage();
+  const arabic = locale === "ar";
+  const faqs = arabic ? AR_FAQS : FAQS;
+  const labels = arabic ? { eyebrow: "استفسارات المؤسسات", title: "إجابات عن الأسئلة التقنية المتكررة." } : { eyebrow: "Enterprise Inquiries", title: "Frequently answered architectural questions." };
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const reducedMotion = useReducedMotion();
 
@@ -55,7 +68,7 @@ export function FaqSection() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: FAQS.map((faq) => ({
+            mainEntity: faqs.map((faq) => ({
               "@type": "Question",
               name: faq.q,
               acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -67,15 +80,15 @@ export function FaqSection() {
         <div className="mb-14 text-center">
           <p className="eyebrow mb-4">
             <HelpCircle size={13} className="text-gold" />
-            Enterprise Inquiries
+            {labels.eyebrow}
           </p>
           <h2 id="faq-title" className="display text-3xl leading-[0.95] text-cream sm:text-5xl">
-            Frequently answered <span className="iridescent">architectural questions.</span>
+            {labels.title}
           </h2>
         </div>
 
         <div className="space-y-4">
-          {FAQS.map((faq, index) => {
+          {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div

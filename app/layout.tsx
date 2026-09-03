@@ -78,7 +78,8 @@ const jsonLd = {
       "alternateName": ["Vortex Mind", "vortexmind.co", "VortexMind", "Vortex Tech"],
       "sameAs": [
         "https://www.linkedin.com/company/vortexmind/",
-        "https://www.instagram.com/vortexmindtech/",
+        "https://www.instagram.com/vortexmind.tech/",
+        "https://web.facebook.com/profile.php?id=61594225491476",
         ...optionalProfileUrls
       ],
       "areaServed": ["Jordan", "Middle East", "GCC", "Worldwide"],
