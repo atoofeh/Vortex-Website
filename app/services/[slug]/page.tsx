@@ -5,6 +5,7 @@ import { CapabilityPage } from "@/components/capability-page";
 import type { ServiceSlug } from "@/components/service-page";
 import { SiteHeader } from "@/components/site-header";
 import { WebDevelopmentPage } from "@/components/web-development-page";
+import { FaqSection } from "@/components/faq-section";
 
 const slugs: ServiceSlug[] = ["artificial-intelligence", "web-development", "mobile-development", "enterprise-software", "infrastructure", "automation"];
 
@@ -58,5 +59,5 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ServiceRoute({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (!slugs.includes(slug as ServiceSlug)) notFound();
-  return <><SiteHeader />{slug === "web-development" ? <WebDevelopmentPage /> : <CapabilityPage slug={slug as Exclude<ServiceSlug, "web-development">} />}<div className="page-shell"><MarketingFooter /></div></>;
+  return <><SiteHeader />{slug === "web-development" ? <WebDevelopmentPage /> : <CapabilityPage slug={slug as Exclude<ServiceSlug, "web-development">} />}<FaqSection /><div className="page-shell"><MarketingFooter /></div></>;
 }

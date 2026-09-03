@@ -4,7 +4,7 @@ import { EngineeringOverview } from "@/components/engineering-overview";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "Engineering at VORTEX",
+  title: "Enterprise Software Engineering & Technical Architecture | VORTEX",
   description: "How VORTEX engineers experience, software, intelligence, data, and infrastructure as one connected system.",
   alternates: { canonical: "/engineering" },
 };

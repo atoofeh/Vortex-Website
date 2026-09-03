@@ -16,11 +16,20 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const siteDescription = "VORTEX engineers private AI infrastructure, intelligent software, enterprise platforms, and digital products from architecture through production.";
+const siteDescription = "VORTEX designs private AI infrastructure, custom enterprise systems, and high-performance cloud architecture. Build your sovereign intelligence today.";
+const optionalProfileUrls = [
+  process.env.NEXT_PUBLIC_CRUNCHBASE_URL,
+  process.env.NEXT_PUBLIC_GITHUB_URL,
+  process.env.NEXT_PUBLIC_GOOGLE_BUSINESS_URL,
+  process.env.NEXT_PUBLIC_OFFICIAL_REGISTRY_URL,
+].filter((url): url is string => Boolean(url));
+const founderName = process.env.NEXT_PUBLIC_FOUNDER_NAME;
+const founderUrl = process.env.NEXT_PUBLIC_FOUNDER_URL;
+const founderAlumniOf = process.env.NEXT_PUBLIC_FOUNDER_ALUMNI_OF;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.vortexmind.co"),
-  title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
+  title: "Private AI Infrastructure & Enterprise Software Engineering | VORTEX",
   description: siteDescription,
   alternates: {
     canonical: "/",
@@ -34,7 +43,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
+    title: "Private AI Infrastructure & Enterprise Software Engineering | VORTEX",
     description: siteDescription,
     siteName: siteConfig.fullName,
     url: "https://www.vortexmind.co",
@@ -49,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.fullName} — ${siteConfig.tagline}`,
+    title: "Private AI Infrastructure & Enterprise Software Engineering | VORTEX",
     description: siteDescription,
     images: ["/Logo.png"],
   },
@@ -65,6 +74,39 @@ const jsonLd = {
       "url": "https://www.vortexmind.co",
       "logo": "https://www.vortexmind.co/Logo.png",
       "description": siteConfig.thesis,
+      "legalName": "VORTEX Mind",
+      "alternateName": ["VORTEX", "Vortex Tech"],
+      "sameAs": [
+        "https://www.linkedin.com/company/vortexmind/",
+        "https://www.instagram.com/vortexmindtech/",
+        ...optionalProfileUrls
+      ],
+      "areaServed": ["Jordan", "Middle East", "GCC"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "VORTEX engineering services",
+        "itemListElement": [
+          { "@id": "https://www.vortexmind.co/#private-ai-architecture" },
+          { "@id": "https://www.vortexmind.co/#custom-software-development" },
+          { "@id": "https://www.vortexmind.co/#cloud-devops-engineering" }
+        ]
+      },
+      ...(founderName ? {
+        "founder": {
+          "@type": "Person",
+          "name": founderName,
+          ...(founderUrl ? { "url": founderUrl } : {}),
+          ...(founderAlumniOf ? { "alumniOf": founderAlumniOf } : {})
+        }
+      } : {}),
+      "knowsAbout": [
+        "Artificial Intelligence",
+        "Private Cloud Infrastructure",
+        "Enterprise Software",
+        "Retrieval-Augmented Generation",
+        "Cloud and DevOps Engineering",
+        "Cybersecurity Architecture"
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Amman",
@@ -78,13 +120,39 @@ const jsonLd = {
     },
     {
       "@type": "Service",
-      "@id": "https://www.vortexmind.co/#service",
-      "name": "Sovereign AI & Private Infrastructure",
+      "@id": "https://www.vortexmind.co/#private-ai-architecture",
+      "name": "Private AI Architecture",
       "provider": {
         "@id": "https://www.vortexmind.co/#organization"
       },
-      "serviceType": "Private AI Computing Infrastructure & Agent Orchestration",
-      "description": siteConfig.thesis
+      "serviceType": "Private AI Architecture",
+      "areaServed": ["Jordan", "Middle East", "GCC"],
+      "serviceArea": { "@type": "Place", "name": "Jordan and the Middle East" },
+      "description": "Private model serving, enterprise RAG, air-gapped inference, and governed AI systems deployed inside the client perimeter."
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.vortexmind.co/#custom-software-development",
+      "name": "Custom Software Development",
+      "provider": {
+        "@id": "https://www.vortexmind.co/#organization"
+      },
+      "serviceType": "Custom Software Development",
+      "areaServed": ["Jordan", "Middle East", "GCC"],
+      "serviceArea": { "@type": "Place", "name": "Jordan and the Middle East" },
+      "description": "Custom enterprise portals, internal tools, APIs, workflows, and digital products engineered from architecture through production."
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.vortexmind.co/#cloud-devops-engineering",
+      "name": "Cloud & DevOps Engineering",
+      "provider": {
+        "@id": "https://www.vortexmind.co/#organization"
+      },
+      "serviceType": "Cloud and DevOps Engineering",
+      "areaServed": ["Jordan", "Middle East", "GCC"],
+      "serviceArea": { "@type": "Place", "name": "Jordan and the Middle East" },
+      "description": "Private, hybrid, and cloud-native infrastructure with secure deployment pipelines, observability, reliability, and operational ownership."
     }
   ]
 };
