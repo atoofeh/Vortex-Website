@@ -75,13 +75,13 @@ const jsonLd = {
       "logo": "https://www.vortexmind.co/Logo.png",
       "description": siteConfig.thesis,
       "legalName": "VORTEX Mind",
-      "alternateName": ["VORTEX", "Vortex Tech"],
+      "alternateName": ["Vortex Mind", "vortexmind.co", "VortexMind", "Vortex Tech"],
       "sameAs": [
         "https://www.linkedin.com/company/vortexmind/",
         "https://www.instagram.com/vortexmindtech/",
         ...optionalProfileUrls
       ],
-      "areaServed": ["Jordan", "Middle East", "GCC"],
+      "areaServed": ["Jordan", "Middle East", "GCC", "Worldwide"],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "VORTEX engineering services",
@@ -126,8 +126,8 @@ const jsonLd = {
         "@id": "https://www.vortexmind.co/#organization"
       },
       "serviceType": "Private AI Architecture",
-      "areaServed": ["Jordan", "Middle East", "GCC"],
-      "serviceArea": { "@type": "Place", "name": "Jordan and the Middle East" },
+      "areaServed": ["Jordan", "Middle East", "GCC", "Worldwide"],
+      "serviceArea": { "@type": "Place", "name": "Worldwide" },
       "description": "Private model serving, enterprise RAG, air-gapped inference, and governed AI systems deployed inside the client perimeter."
     },
     {
@@ -138,8 +138,8 @@ const jsonLd = {
         "@id": "https://www.vortexmind.co/#organization"
       },
       "serviceType": "Custom Software Development",
-      "areaServed": ["Jordan", "Middle East", "GCC"],
-      "serviceArea": { "@type": "Place", "name": "Jordan and the Middle East" },
+      "areaServed": ["Jordan", "Middle East", "GCC", "Worldwide"],
+      "serviceArea": { "@type": "Place", "name": "Worldwide" },
       "description": "Custom enterprise portals, internal tools, APIs, workflows, and digital products engineered from architecture through production."
     },
     {
@@ -150,8 +150,8 @@ const jsonLd = {
         "@id": "https://www.vortexmind.co/#organization"
       },
       "serviceType": "Cloud and DevOps Engineering",
-      "areaServed": ["Jordan", "Middle East", "GCC"],
-      "serviceArea": { "@type": "Place", "name": "Jordan and the Middle East" },
+      "areaServed": ["Jordan", "Middle East", "GCC", "Worldwide"],
+      "serviceArea": { "@type": "Place", "name": "Worldwide" },
       "description": "Private, hybrid, and cloud-native infrastructure with secure deployment pipelines, observability, reliability, and operational ownership."
     }
   ]
