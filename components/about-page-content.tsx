@@ -4,12 +4,16 @@ import Link from "next/link";
 import { ArrowRight, Check, Globe2, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { FaqSection } from "@/components/faq-section";
 import { useLanguage } from "@/components/language-provider";
+import type { Locale } from "@/lib/i18n";
+import { useEffect, useState } from "react";
 
 type ProfileLink = readonly [string, string];
 
-export function AboutPageContent({ profileLinks }: { profileLinks: ProfileLink[] }) {
+export function AboutPageContent({ profileLinks, initialLocale }: { profileLinks: readonly ProfileLink[]; initialLocale?: Locale }) {
   const { locale } = useLanguage();
-  const arabic = locale === "ar";
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const arabic = (hydrated ? locale : (initialLocale ?? locale)) === "ar";
   const labels = arabic ? {
     eyebrow: "من هي VORTEX",
     title: "VORTEX: ذكاء اصطناعي خاص وهندسة برمجيات مؤسسية من الأردن إلى العالم.",
@@ -68,6 +72,6 @@ export function AboutPageContent({ profileLinks }: { profileLinks: ProfileLink[]
     <section className="section-wrap py-20 sm:py-28" aria-labelledby="about-region"><div className="mb-12 max-w-3xl"><p className="eyebrow mb-4"><MapPin aria-hidden="true" size={13} className="text-gold" /> {labels.regionEyebrow}</p><h2 id="about-region" className="display text-4xl leading-[0.95] text-cream sm:text-6xl">{labels.regionTitle}</h2><p className="mt-6 text-base leading-relaxed text-muted sm:text-lg">{labels.regionDescription}</p></div><div className="grid gap-4 md:grid-cols-3"><article className="rounded-2xl border border-gold/20 bg-[#2D0812]/50 p-6"><Globe2 aria-hidden="true" className="text-gold" /><h3 className="mt-7 font-display text-2xl font-bold text-cream">{labels.jordan}</h3><p className="mt-3 text-sm leading-relaxed text-muted">{labels.jordanDescription}</p></article><article className="rounded-2xl border border-gold/20 bg-[#2D0812]/50 p-6"><ShieldCheck aria-hidden="true" className="text-gold" /><h3 className="mt-7 font-display text-2xl font-bold text-cream">{labels.sovereignty}</h3><p className="mt-3 text-sm leading-relaxed text-muted">{labels.sovereigntyDescription}</p></article><article className="rounded-2xl border border-gold/20 bg-[#2D0812]/50 p-6"><Sparkles aria-hidden="true" className="text-gold" /><h3 className="mt-7 font-display text-2xl font-bold text-cream">{labels.worldwide}</h3><p className="mt-3 text-sm leading-relaxed text-muted">{labels.worldwideDescription}</p></article></div></section>
     <section className="section-wrap border-y border-gold/15 py-20 sm:py-28" aria-labelledby="about-sectors"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr] lg:items-start"><div><p className="eyebrow mb-4"><Check aria-hidden="true" size={13} className="text-gold" /> {labels.sectorsEyebrow}</p><h2 id="about-sectors" className="display text-4xl leading-[0.95] text-cream sm:text-6xl">{labels.sectorsTitle}</h2></div><div className="grid gap-3 sm:grid-cols-2">{labels.sectors.map((sector) => <p key={sector} className="rounded-2xl border border-gold/20 bg-[#2D0812]/50 p-5 text-sm leading-relaxed text-muted">{sector}</p>)}</div></div></section>
     <section className="section-wrap py-20 sm:py-28" aria-labelledby="about-profiles"><div className="rounded-[2rem] border border-gold/25 bg-[#1F050C] p-7 sm:p-12"><p className="eyebrow mb-4"><Globe2 aria-hidden="true" size={13} className="text-gold" /> {labels.profilesEyebrow}</p><h2 id="about-profiles" className="display max-w-4xl text-4xl leading-[0.95] text-cream sm:text-6xl">{labels.profilesTitle}</h2><p className="mt-6 max-w-2xl text-base leading-relaxed text-muted">{labels.profilesDescription}</p><div className="mt-8 flex flex-wrap gap-3">{profileLinks.map(([label, url]) => <a key={label} href={url} target="_blank" rel="noreferrer" className="focus-ring rounded-full border border-gold/25 px-4 py-2 text-xs font-semibold text-champagne hover:border-gold hover:text-cream">{label}</a>)}</div></div></section>
-    <FaqSection />
+    <FaqSection initialLocale={initialLocale} />
   </main>;
 }

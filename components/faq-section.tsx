@@ -2,8 +2,9 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/language-provider";
+import type { Locale } from "@/lib/i18n";
 
 export const FAQS = [
   {
@@ -48,9 +49,12 @@ const AR_FAQS = [
   { q: "هل تستطيع VORTEX التكامل مع Kubernetes والسحابة الهجينة الحالية؟", a: "نعم. نصمم التكامل مع Kubernetes والسحابات الهجينة والعقد المحلية، مع واجهات تشغيل واضحة ومسار نشر قابل للرصد ودون ارتهان لمورّد واحد." },
 ];
 
-export function FaqSection() {
+export function FaqSection({ initialLocale }: { initialLocale?: Locale } = {}) {
   const { locale } = useLanguage();
-  const arabic = locale === "ar";
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const activeLocale = hydrated ? locale : (initialLocale ?? locale);
+  const arabic = activeLocale === "ar";
   const faqs = arabic ? AR_FAQS : FAQS;
   const labels = arabic ? { eyebrow: "استفسارات المؤسسات", title: "إجابات عن الأسئلة التقنية المتكررة." } : { eyebrow: "Enterprise Inquiries", title: "Frequently answered architectural questions." };
   const [openIndex, setOpenIndex] = useState<number | null>(0);

@@ -2,13 +2,17 @@
 
 import Link from "next/link";
 import { ArrowRight, Check, Network, ShieldCheck, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import type { Solution } from "@/lib/seo-content";
 import { arabicSolutions } from "@/lib/seo-translations";
 import { useLanguage } from "@/components/language-provider";
+import type { Locale } from "@/lib/i18n";
 
-export function SolutionPage({ solution }: { solution: Solution }) {
+export function SolutionPage({ solution, initialLocale }: { solution: Solution; initialLocale?: Locale }) {
   const { locale } = useLanguage();
-  const arabic = locale === "ar";
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const arabic = (hydrated ? locale : (initialLocale ?? locale)) === "ar";
   const content = arabic ? { ...solution, ...arabicSolutions[solution.slug] } : solution;
   const labels = arabic ? {
     allSolutions: "كل الحلول",

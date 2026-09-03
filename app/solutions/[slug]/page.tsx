@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const solution = solutions[slug as SolutionSlug];
   if (!solution) return {};
-  return { title: `${solution.title} | VORTEX`, description: solution.description, alternates: { canonical: `/solutions/${solution.slug}` } };
+  return { title: `${solution.title} | VORTEX`, description: solution.description, alternates: { canonical: `/solutions/${solution.slug}`, languages: { en: `/solutions/${solution.slug}`, ar: `/ar/solutions/${solution.slug}`, "x-default": `/solutions/${solution.slug}` } } };
 }
 
 export default async function SolutionRoute({ params }: { params: Promise<{ slug: string }> }) {

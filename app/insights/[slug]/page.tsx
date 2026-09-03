@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const insight = insightBySlug[slug];
   if (!insight) return {};
-  return { title: `${insight.title} | VORTEX Engineering`, description: insight.description, alternates: { canonical: `/insights/${insight.slug}` }, openGraph: { type: "article", publishedTime: insight.published, title: `${insight.title} | VORTEX Engineering`, description: insight.description } };
+  return { title: `${insight.title} | VORTEX Engineering`, description: insight.description, alternates: { canonical: `/insights/${insight.slug}`, languages: { en: `/insights/${insight.slug}`, ar: `/ar/insights/${insight.slug}`, "x-default": `/insights/${insight.slug}` } }, openGraph: { type: "article", publishedTime: insight.published, title: `${insight.title} | VORTEX Engineering`, description: insight.description } };
 }
 
 export default async function InsightRoute({ params }: { params: Promise<{ slug: string }> }) {

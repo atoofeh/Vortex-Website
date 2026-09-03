@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   title: "About VORTEX | AI & Enterprise Software Engineering in Jordan and Worldwide",
   description: "VORTEX is a private AI infrastructure and enterprise software engineering firm headquartered in Amman, Jordan, serving organizations worldwide.",
-  alternates: { canonical: "/about" },
+  alternates: { canonical: "/about", languages: { en: "/about", ar: "/ar/about", "x-default": "/about" } },
 };
 
 const profileLinks = [

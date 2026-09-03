@@ -6,7 +6,7 @@ import { InsightsIndexContent } from "@/components/insights-index-content";
 export const metadata: Metadata = {
   title: "Engineering Insights & Technical Blueprints | VORTEX",
   description: "Technical blueprints from VORTEX on private LLMs, enterprise RAG retrieval, and modernizing critical software systems.",
-  alternates: { canonical: "/insights" },
+  alternates: { canonical: "/insights", languages: { en: "/insights", ar: "/ar/insights", "x-default": "/insights" } },
 };
 
 export default function InsightsPage() {

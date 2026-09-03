@@ -6,7 +6,7 @@ import { SolutionsIndexContent } from "@/components/solutions-index-content";
 export const metadata: Metadata = {
   title: "Private AI & Secure Enterprise Solutions | VORTEX",
   description: "Explore VORTEX solutions for on-premise LLM deployment, private RAG systems, and secure internal enterprise tools.",
-  alternates: { canonical: "/solutions" },
+  alternates: { canonical: "/solutions", languages: { en: "/solutions", ar: "/ar/solutions", "x-default": "/solutions" } },
 };
 
 export default function SolutionsIndexPage() {

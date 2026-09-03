@@ -2,13 +2,17 @@
 
 import Link from "next/link";
 import { ArrowRight, BookOpen, Check, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
 import type { Insight } from "@/lib/seo-content";
 import { arabicInsights } from "@/lib/seo-translations";
 import { useLanguage } from "@/components/language-provider";
+import type { Locale } from "@/lib/i18n";
 
-export function InsightArticle({ insight }: { insight: Insight }) {
+export function InsightArticle({ insight, initialLocale }: { insight: Insight; initialLocale?: Locale }) {
   const { locale } = useLanguage();
-  const arabic = locale === "ar";
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const arabic = (hydrated ? locale : (initialLocale ?? locale)) === "ar";
   const content = arabic ? arabicInsights[insight.slug] : insight;
   const labels = arabic ? {
     back: "المخططات الهندسية",

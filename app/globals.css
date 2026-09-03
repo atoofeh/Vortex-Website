@@ -110,7 +110,21 @@ html[lang="ar"] body {
   letter-spacing: 0;
 }
 
+/* Arabic routes declare their language and direction in the server HTML so
+   crawlers and users get the correct reading direction before hydration. */
+.ar-route {
+  font-family: var(--font-arabic), var(--font-sans), sans-serif;
+  letter-spacing: 0;
+}
+
 html[lang="ar"] .display {
+  font-family: var(--font-arabic), var(--font-display), sans-serif;
+  font-weight: 700;
+  letter-spacing: normal;
+  line-height: 1.12;
+}
+
+.ar-route .display {
   font-family: var(--font-arabic), var(--font-display), sans-serif;
   font-weight: 700;
   letter-spacing: normal;
@@ -123,12 +137,27 @@ html[lang="ar"] .font-display {
   line-height: 1.2;
 }
 
+.ar-route .font-display {
+  font-family: var(--font-arabic), var(--font-display), sans-serif;
+  letter-spacing: normal;
+  line-height: 1.2;
+}
+
 html[lang="ar"] .eyebrow,
 html[lang="ar"] .font-mono {
   letter-spacing: 0.02em;
 }
 
+.ar-route .eyebrow,
+.ar-route .font-mono {
+  letter-spacing: 0.02em;
+}
+
 html[dir="rtl"] .link-underline::after {
+  transform-origin: right;
+}
+
+.ar-route .link-underline::after {
   transform-origin: right;
 }
 
@@ -142,6 +171,11 @@ html[dir="rtl"] .hero-phrase-rule {
 
 html[dir="rtl"] input,
 html[dir="rtl"] textarea {
+  text-align: right;
+}
+
+.ar-route input,
+.ar-route textarea {
   text-align: right;
 }
 
