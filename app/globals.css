@@ -376,6 +376,21 @@ button {
   cursor: pointer;
 }
 
+/* Native VORTEX pointer. */
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  html,
+  body,
+  body * {
+    cursor: url("/cursor-vortex.png") 6 6, auto !important;
+  }
+
+  input,
+  textarea,
+  [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
+
 .display {
   font-weight: 600;
   letter-spacing: -0.04em;
