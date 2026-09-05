@@ -5,6 +5,7 @@ const scriptSources = ["'self'", "'unsafe-inline'", ...(isDevelopment ? ["'unsaf
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  devIndicators: false,
   poweredByHeader: false,
   async headers() {
     return [

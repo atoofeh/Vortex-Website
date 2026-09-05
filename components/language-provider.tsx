@@ -1,7 +1,9 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { defaultLocale, getTranslation, type Locale, type Translations, translations } from "@/lib/i18n";
+import { createContext, useContext, useEffect, useMemo } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { getTranslation, type Locale, type Translations, translations } from "@/lib/i18n";
+import { languagePath } from "@/lib/seo";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -14,15 +16,9 @@ type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale);
-
-  useEffect(() => {
-    const stored = window.localStorage.getItem("preferredLanguage");
-    const nextLocale: Locale = stored === "ar" ? "ar" : "en";
-    setLocaleState(nextLocale);
-    document.documentElement.lang = nextLocale;
-    document.documentElement.dir = nextLocale === "ar" ? "rtl" : "ltr";
-  }, []);
+  const pathname = usePathname();
+  const router = useRouter();
+  const locale: Locale = pathname === "/ar" || pathname.startsWith("/ar/") ? "ar" : "en";
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -30,13 +26,14 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     window.localStorage.setItem("preferredLanguage", locale);
   }, [locale]);
 
-  const value = useMemo<LanguageContextValue>(() => ({
-    locale,
-    setLocale: setLocaleState,
-    toggleLocale: () => setLocaleState((current) => current === "en" ? "ar" : "en"),
-    t: (path) => getTranslation(locale, path),
-    copy: translations[locale],
-  }), [locale]);
+  const value = useMemo<LanguageContextValue>(() => {
+    const setLocale = (next: Locale) => {
+      window.localStorage.setItem("preferredLanguage", next);
+      const target = languagePath(pathname, next);
+      if (target !== pathname) router.push(`${target}${window.location.search}${window.location.hash}`);
+    };
+    return { locale, setLocale, toggleLocale: () => setLocale(locale === "en" ? "ar" : "en"), t: (path) => getTranslation(locale, path), copy: translations[locale] };
+  }, [locale, pathname, router]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }

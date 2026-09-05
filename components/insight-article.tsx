@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/localized-link";
 import { ArrowRight, BookOpen, Check, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Insight } from "@/lib/seo-content";
@@ -40,7 +40,7 @@ export function InsightArticle({ insight, initialLocale }: { insight: Insight; i
       <article>
         <header className="section-wrap pb-20 sm:pb-28">
           <Link href="/insights" className="focus-ring inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted hover:text-champagne"><ArrowRight aria-hidden="true" size={14} className="rotate-180" /> {labels.back}</Link>
-          <div className="mt-10 max-w-5xl"><p className="eyebrow mb-5"><BookOpen aria-hidden="true" size={13} className="text-gold" /> {labels.blueprint}</p><h1 className="display max-w-5xl text-[clamp(3rem,7vw,6.8rem)] leading-[0.9] text-cream">{content.title}</h1><p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">{content.description}</p><div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-wider text-champagne"><time dateTime={insight.published}>{new Date(`${insight.published}T00:00:00Z`).toLocaleDateString(arabic ? "ar-JO" : "en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time><span aria-hidden="true">/</span><span>{content.readTime}</span></div></div>
+          <div className="mt-10 max-w-5xl"><p className="eyebrow mb-5"><BookOpen aria-hidden="true" size={13} className="text-gold" /> {labels.blueprint}</p><h1 className="display max-w-5xl text-[clamp(3rem,7vw,6.8rem)] leading-[0.9] text-cream">{content.title}</h1><p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">{content.description}</p><div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs uppercase tracking-wider text-champagne"><Link href="/about" className="focus-ring">{arabic ? "بقلم VORTEX" : "By VORTEX"}</Link><time dateTime={insight.published}>{new Date(`${insight.published}T00:00:00Z`).toLocaleDateString(arabic ? "ar-JO" : "en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time><span aria-hidden="true">/</span><span>{content.readTime}</span></div></div>
         </header>
         <div className="section-wrap grid gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-start">
           <aside className="lg:sticky lg:top-28"><div className="rounded-2xl border border-gold/20 bg-[#2D0812]/50 p-6"><p className="font-mono text-xs font-bold uppercase tracking-wider text-gold">{labels.inThis}</p><ol className="mt-5 space-y-3">{content.sections.map((section, index) => <li key={section.heading} className="flex gap-3 text-sm text-muted"><span className="font-mono text-xs text-gold">0{index + 1}</span><span>{section.heading}</span></li>)}</ol></div><Link href={insight.solutionHref} className="focus-ring mt-4 block rounded-2xl border border-gold/30 bg-gold/10 p-6 text-sm font-semibold leading-relaxed text-champagne hover:border-gold hover:text-cream">{arabic ? "استكشف " : "Explore our "}{content.solutionLabel}<ArrowRight aria-hidden="true" size={14} className="ms-2 inline" /></Link></aside>

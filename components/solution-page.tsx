@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/localized-link";
 import { ArrowRight, Check, Network, ShieldCheck, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Solution } from "@/lib/seo-content";

@@ -1,4 +1,5 @@
 node_modules
+.review/
 .next
 out
 .env*

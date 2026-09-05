@@ -3,19 +3,22 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
+import { useLanguage } from "@/components/language-provider";
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
   const { theme, toggleTheme } = useTheme();
+  const { locale } = useLanguage();
 
   const isLight = theme === "light";
+  const label = locale === "ar" ? (isLight ? "التبديل إلى الوضع الداكن" : "التبديل إلى الوضع الفاتح") : (isLight ? "Switch to Dark Mode" : "Switch to Light Mode");
 
   return (
     <button
       type="button"
       onClick={toggleTheme}
       data-cursor="interactive"
-      aria-label={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
-      title={isLight ? "Switch to Dark Mode" : "Switch to Light Mode"}
+      aria-label={label}
+      title={label}
       className={
         "focus-ring relative z-10 grid h-9 w-9 cursor-pointer place-items-center overflow-hidden rounded-full border transition-all duration-400 " +
         (isLight

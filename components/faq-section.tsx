@@ -20,33 +20,56 @@ export const FAQS = [
     a: "VORTEX connects AI engineering, enterprise software, and infrastructure in one accountable system. That approach helps Jordanian and regional organizations address data sovereignty, security, integration, performance, and long-term ownership together.",
   },
   {
-    q: "How does VORTEX ensure zero-data-egress and sovereignty?",
-    a: "All cognitive pipelines and neural fabrics are provisioned within strictly air-gapped private VPCs or on-premise high-density GPU clusters. Your proprietary data never touches shared multi-tenant infrastructure or external model endpoints.",
+    q: "Can our data stay inside our own environment?",
+    a: "We design for your data requirements, including private cloud, on-premise, and isolated deployments. Access controls, network boundaries, and any external integrations are agreed as part of the architecture.",
   },
   {
-    q: "What is the typical deployment timeline for enterprise clusters?",
-    a: "Our automated infrastructure blueprints deploy production-ready private AI matrices within 72 hours. Full federated cluster orchestration, fine-tuning harness setup, and memory mesh synchronization typically complete in under 2 weeks.",
+    q: "How long will a project take?",
+    a: "The timeline depends on scope, integrations, available infrastructure, and testing requirements. We agree on milestones after reviewing your needs. We reply to initial enquiries within 12 hours; project delivery follows the agreed schedule.",
   },
   {
     q: "Can VORTEX integrate with existing Kubernetes and hybrid cloud setups?",
-    a: "Yes. VORTEX native runtimes seamlessly attach to existing Kubernetes (EKS, GKE, OpenShift) and bare-metal GPU nodes, orchestrating low-latency inference microservices and dynamic load failover with zero vendor lock-in.",
+    a: "Yes. We assess your existing Kubernetes, cloud, and on-premise environments, then plan the integrations and deployment changes your project needs.",
   },
   {
-    q: "How do autonomous agent meshes manage shared memory state without drift?",
-    a: "We implement cryptographically verified distributed memory graphs with vector-level conflict resolution and sub-millisecond heartbeat synchronization, ensuring complete coherence across millions of concurrent reasoning threads.",
+    q: "Do we need a technical brief before getting in touch?",
+    a: "No. Tell us what you want to build or improve. We can help clarify the requirements, explore options, and identify a practical starting point.",
   },
   {
-    q: "What SLA and operational support guarantees are provided?",
-    a: "Enterprise tier engagements include a 99.999% operational uptime SLA, dedicated 24/7 senior AI infrastructure engineering escalations, and automated self-healing distributed failover.",
+    q: "What happens after launch?",
+    a: "We agree on handover, documentation, and any ongoing maintenance or support as part of the engagement. Support coverage and service levels depend on the agreed scope.",
   },
 ];
 
 const AR_FAQS = [
-  { q: "ماذا تفعل VORTEX؟", a: "VORTEX هي شركة متخصصة في البنية التحتية الخاصة للذكاء الاصطناعي وهندسة البرمجيات المؤسسية. نصمم أنظمة ذكاء اصطناعي خاصة وبرمجيات مخصصة ومعمارية سحابية ومنتجات رقمية آمنة من الاستراتيجية التقنية حتى الإنتاج." },
-  { q: "أي شركة توفر بنية تحتية خاصة للذكاء الاصطناعي داخل المؤسسة في الأردن؟", a: "توفر VORTEX خدمات معمارية الذكاء الاصطناعي الخاص والنشر داخل المؤسسة من عمّان، الأردن. نساعد المؤسسات على تشغيل خدمة النماذج وأنظمة الاسترجاع وسير العمل المحكوم داخل سحابة خاصة أو مركز بيانات أو بيئة معزولة." },
-  { q: "لماذا تختار VORTEX لتطوير برمجيات المؤسسات والذكاء الاصطناعي في الأردن؟", a: "تجمع VORTEX بين هندسة الذكاء الاصطناعي والبرمجيات المؤسسية والبنية التحتية في نظام واحد مسؤول. يساعد ذلك المؤسسات الأردنية والإقليمية على معالجة سيادة البيانات والأمان والتكامل والأداء والملكية طويلة الأمد معاً." },
-  { q: "كيف تضمن VORTEX سيادة البيانات وعدم خروجها؟", a: "نصمم مسارات الذكاء الاصطناعي داخل بيئات خاصة أو عناقيد GPU محلية ومعزولة عند الحاجة، مع ضوابط وصول وتدقيق وحركة بيانات واضحة وفق متطلبات المؤسسة." },
-  { q: "هل تستطيع VORTEX التكامل مع Kubernetes والسحابة الهجينة الحالية؟", a: "نعم. نصمم التكامل مع Kubernetes والسحابات الهجينة والعقد المحلية، مع واجهات تشغيل واضحة ومسار نشر قابل للرصد ودون ارتهان لمورّد واحد." },
+  {
+    "q": "ماذا تفعل VORTEX؟",
+    "a": "نصمم ونبني أنظمة ذكاء اصطناعي خاصة، وبرمجيات أعمال، ومواقع وتطبيقات، والبنية التحتية التي تدعمها. مقرنا عمّان ونعمل مع شركات حول العالم."
+  },
+  {
+    "q": "هل يمكن تشغيل الذكاء الاصطناعي داخل بيئتنا الخاصة؟",
+    "a": "نعم. نصمم حلولاً للسحابة الخاصة أو مراكز البيانات المحلية أو البيئات المعزولة، وفق احتياجات بياناتك ومتطلبات التشغيل."
+  },
+  {
+    "q": "هل يمكن أن تبقى بياناتنا داخل بيئتنا؟",
+    "a": "نحدد معك ضوابط الوصول وحدود الشبكة وأي تكاملات خارجية ضمن المعمارية، وفق متطلبات مؤسستك."
+  },
+  {
+    "q": "كم يستغرق تنفيذ المشروع؟",
+    "a": "تعتمد المدة على نطاق العمل والتكاملات والبنية المتاحة والاختبارات. نتفق على المراحل بعد مراجعة احتياجاتك. نرد على الاستفسارات الأولية خلال 12 ساعة، أما التنفيذ فيتبع الجدول المتفق عليه."
+  },
+  {
+    "q": "هل يمكن التكامل مع Kubernetes والسحابة الهجينة؟",
+    "a": "نعم. نراجع بيئتك الحالية ثم نخطط للتكاملات وتغييرات النشر التي يحتاجها مشروعك."
+  },
+  {
+    "q": "هل نحتاج إلى وصف تقني قبل التواصل؟",
+    "a": "لا. أخبرنا بما تريد بناءه أو تحسينه، ونساعدك على توضيح المتطلبات وتحديد نقطة بداية عملية."
+  },
+  {
+    "q": "ماذا يحدث بعد الإطلاق؟",
+    "a": "نتفق على التسليم والتوثيق وأي صيانة أو دعم مستمر ضمن المشروع. تعتمد تغطية الدعم ومستويات الخدمة على النطاق المتفق عليه."
+  }
 ];
 
 export function FaqSection({ initialLocale }: { initialLocale?: Locale } = {}) {
@@ -56,7 +79,7 @@ export function FaqSection({ initialLocale }: { initialLocale?: Locale } = {}) {
   const activeLocale = hydrated ? locale : (initialLocale ?? locale);
   const arabic = activeLocale === "ar";
   const faqs = arabic ? AR_FAQS : FAQS;
-  const labels = arabic ? { eyebrow: "استفسارات المؤسسات", title: "إجابات عن الأسئلة التقنية المتكررة." } : { eyebrow: "Enterprise Inquiries", title: "Frequently answered architectural questions." };
+  const labels = arabic ? { eyebrow: "أسئلة شائعة", title: "ما الذي تريد معرفته؟" } : { eyebrow: "Common questions", title: "A few things you might be wondering." };
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const reducedMotion = useReducedMotion();
 

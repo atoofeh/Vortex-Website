@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { AboutPageContent } from "@/components/about-page-content";
 import { MarketingFooter } from "@/components/marketing-home";
 import { SiteHeader } from "@/components/site-header";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "عن VORTEX | هندسة الذكاء الاصطناعي والبرمجيات في الأردن والعالم",
   description: "VORTEX شركة بنية تحتية خاصة للذكاء الاصطناعي وهندسة برمجيات مؤسسية مقرها عمّان، الأردن، وتخدم المؤسسات حول العالم.",
   alternates: { canonical: "/ar/about", languages: { en: "/about", ar: "/ar/about", "x-default": "/about" } },
-};
+});
 
 const profileLinks = [
   ["LinkedIn", "https://www.linkedin.com/company/vortexmind/"],

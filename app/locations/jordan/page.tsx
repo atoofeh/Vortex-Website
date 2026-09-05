@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { MarketingFooter } from "@/components/marketing-home";
 import { JordanLocationContent } from "@/components/jordan-location-content";
 import { SiteHeader } from "@/components/site-header";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Private AI & Enterprise Software Engineering in Jordan | VORTEX",
   description: "VORTEX is headquartered in Amman, Jordan, delivering private AI infrastructure, enterprise software, secure internal tools, and cloud engineering worldwide.",
   alternates: { canonical: "/locations/jordan", languages: { en: "/locations/jordan", ar: "/ar/locations/jordan", "x-default": "/locations/jordan" } },
-};
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

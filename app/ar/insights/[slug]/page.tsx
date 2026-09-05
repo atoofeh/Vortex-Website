@@ -1,3 +1,4 @@
+import { pageMetadata, serializeSchema, siteUrl } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { InsightArticle } from "@/components/insight-article";
@@ -12,12 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const insight = arabicInsights[slug];
   if (!insight) return {};
-  return { title: `${insight.title} | VORTEX`, description: insight.description, alternates: { canonical: `/ar/insights/${slug}`, languages: { en: `/insights/${slug}`, ar: `/ar/insights/${slug}`, "x-default": `/insights/${slug}` } } };
+  return pageMetadata({ title: `${insight.title} | VORTEX`, description: insight.description, alternates: { canonical: `/ar/insights/${slug}` }, openGraph: { type: "article", publishedTime: insightBySlug[slug]?.published } });
 }
 
 export default async function ArabicInsightRoute({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const insight = insightBySlug[slug];
   if (!insight) notFound();
-  return <><SiteHeader /><InsightArticle insight={insight} initialLocale="ar" /><div className="page-shell"><MarketingFooter /></div></>;
+  const translated = arabicInsights[slug];
+  const schema = { "@context": "https://schema.org", "@type": "TechArticle", headline: translated.title, description: translated.description, datePublished: insight.published, inLanguage: "ar", mainEntityOfPage: `${siteUrl}/ar/insights/${slug}`, author: { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: "VORTEX", url: `${siteUrl}/ar/about` }, publisher: { "@id": `${siteUrl}/#organization` } };
+  return <><SiteHeader /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeSchema(schema) }} /><InsightArticle insight={insight} initialLocale="ar" /><div className="page-shell"><MarketingFooter /></div></>;
 }

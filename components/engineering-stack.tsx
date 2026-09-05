@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/localized-link";
 import { ArrowRight, BrainCircuit, Code2, Database, Globe2, Layers3, Server } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";

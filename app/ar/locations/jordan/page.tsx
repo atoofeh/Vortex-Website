@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { MarketingFooter } from "@/components/marketing-home";
 import { JordanLocationContent } from "@/components/jordan-location-content";
 import { SiteHeader } from "@/components/site-header";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "الذكاء الاصطناعي الخاص وهندسة البرمجيات في الأردن | VORTEX",
   description: "VORTEX شركة هندسة تقنية مقرها عمّان، الأردن، تقدم البنية التحتية الخاصة للذكاء الاصطناعي والبرمجيات المؤسسية للمؤسسات حول العالم.",
   alternates: { canonical: "/ar/locations/jordan", languages: { en: "/locations/jordan", ar: "/ar/locations/jordan", "x-default": "/locations/jordan" } },
-};
+});
 
 const jsonLd = {
   "@context": "https://schema.org",

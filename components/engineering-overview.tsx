@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/localized-link";
 import { Activity, ArrowDown, ArrowRight, BrainCircuit, Check, CloudCog, Code2, Database, Gauge, Layers3, LockKeyhole, Network, Server, ShieldCheck, Sparkles, Workflow } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
@@ -40,7 +40,7 @@ const overviewCopy = {
     heroTitle: "Technology is rarely one layer. Neither are we.",
     heroDescription: "VORTEX engineers the experience, software, intelligence, data, and infrastructure behind systems that need to work together in production.",
     start: "Start a project",
-    capabilities: "Explore capabilities",
+    capabilities: "Explore services",
     stackEyebrow: "One connected system",
     stackTitle: "Every layer has a job. Every connection has a consequence.",
     stackDescription: "Select a layer to see what it contributes. The architecture is the product—not a diagram added after the fact.",
@@ -62,7 +62,7 @@ const overviewCopy = {
     heroTitle: "نادراً ما تكون التقنية طبقة واحدة. ونحن كذلك.",
     heroDescription: "تهندس VORTEX التجربة والبرمجيات والذكاء والبيانات والبنية التحتية خلف الأنظمة التي يجب أن تعمل معاً في الإنتاج.",
     start: "ابدأ مشروعاً",
-    capabilities: "استكشف القدرات",
+    capabilities: "استكشف الخدمات",
     stackEyebrow: "نظام واحد متصل",
     stackTitle: "لكل طبقة دور. ولكل اتصال أثر.",
     stackDescription: "اختر طبقة لمعرفة مساهمتها. المعمارية هي المنتج، وليست مخططاً يضاف بعد اكتمال العمل.",

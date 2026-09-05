@@ -1,6 +1,7 @@
 @import "../styles/vortex-emblem-field.css";
 @import "../styles/vortex-light-theme.css";
 @import "../styles/liquid-glass-card.css";
+@import "../styles/marketing-refresh.css";
 
 @tailwind base;
 @tailwind components;
@@ -373,21 +374,6 @@ a,
 button {
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
-}
-
-/* Native VORTEX pointer. */
-@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
-  html,
-  body,
-  body * {
-    cursor: url("/cursor-vortex.png") 6 6, auto !important;
-  }
-
-  input,
-  textarea,
-  [contenteditable="true"] {
-    cursor: text !important;
-  }
 }
 
 .display {
@@ -1037,6 +1023,8 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .world-map,
+  .light .world-map,
+  [data-theme="light"] .world-map,
   .world-map-dot,
   .world-map-hotspots circle {
     animation: none;
