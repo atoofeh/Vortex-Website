@@ -18,6 +18,19 @@ body:has(.refresh-home, .refresh-about-page) .vortex-field { opacity: .08; }
 #main-content.refresh-home .refresh-hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, .8fr); align-items: center; gap: clamp(3rem, 7vw, 7rem); min-height: min(850px, 100svh); padding-top: 10rem; padding-bottom: 5rem; }
 #main-content .refresh-hero-title { max-width: 100%; margin-top: 1.5rem; color: var(--text-primary); font-size: clamp(4rem, 7.2vw, 6.75rem); letter-spacing: -.055em; line-height: 1.04; }
 .refresh-hero-title > span { color: var(--text-secondary); }
+/* Hero service rotator. Every title is stacked in one grid cell, so the slot is
+   sized by the longest name in the active language and the intro copy below it
+   never reflows as the phrase changes. */
+.refresh-rotator { display: flex; align-items: baseline; flex-wrap: wrap; gap: .55rem; margin-top: 1.75rem; font-size: clamp(1.05rem, 1.9vw, 1.4rem); line-height: 1.5; }
+.refresh-rotator-prefix { color: var(--text-muted); font-weight: 500; }
+/* Weight sits on the slot so the hidden sizers measure exactly like the live
+   phrase. Colour is the only thing that separates them. */
+.refresh-rotator-slot { display: inline-grid; font-weight: 650; }
+.refresh-rotator-slot > * { grid-area: 1 / 1; }
+.refresh-rotator-ghost { visibility: hidden; }
+.refresh-rotator-phrase { color: var(--text-secondary); }
+.refresh-rotator-word { display: inline-block; white-space: nowrap; }
+.refresh-rotator-unit { display: inline-block; backface-visibility: hidden; }
 .refresh-intro { max-width: 570px; margin-top: 1.8rem; color: var(--text-muted); font-size: 1.1rem; line-height: 1.85; }
 .refresh-location { margin-top: 2.7rem; color: var(--text-muted); font-size: .75rem; }
 .refresh-directory { padding-block: 1.8rem; border-block: 1px solid var(--line); }

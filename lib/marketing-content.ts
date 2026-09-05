@@ -23,7 +23,7 @@ export const marketingServices = [
 
 export const marketingCopy = {
   en: {
-    eyebrow: "VORTEX / Private AI & software engineering", title: "Your AI.", accent: "Your control.",
+    eyebrow: "VORTEX / Private AI & software engineering", title: "Your AI.", accent: "Your control.", buildPrefix: "We build",
     description: "Private AI built around your business, running in an environment you control. We build the infrastructure and software to make it useful, from internal tools to websites and apps.",
     primary: "Talk to our team", secondary: "Explore our services", location: "Amman, Jordan · Working worldwide", index: "Built around what you need", indexNote: "Start with the problem. We’ll help with the how.",
     servicesLabel: "01 / Our services", servicesTitle: "Private AI. And what comes with it.", servicesIntro: "Start with AI, or come to us for a standalone software project. We’ll shape the work around what you need.", details: "Explore service",
@@ -38,7 +38,7 @@ export const marketingCopy = {
     contactLabel: "Your next step", contactTitle: "What would you like\nto build?", contactText: "Tell us a little about your idea. We’ll reply to your enquiry within 12 hours to discuss the next step.", contactNote: "A few sentences are enough. No technical brief needed.", emailLabel: "Prefer email?",
   },
   ar: {
-    eyebrow: "VORTEX / الذكاء الاصطناعي الخاص وهندسة البرمجيات", title: "ذكاؤك الاصطناعي.", accent: "تحت سيطرتك.",
+    eyebrow: "VORTEX / الذكاء الاصطناعي الخاص وهندسة البرمجيات", title: "ذكاؤك الاصطناعي.", accent: "تحت سيطرتك.", buildPrefix: "نبني",
     description: "ذكاء اصطناعي خاص مبني حول عملك، يعمل في بيئة تتحكم بها. نبني البنية التحتية والبرمجيات التي تجعله مفيداً، من الأدوات الداخلية إلى المواقع والتطبيقات.",
     primary: "تحدث مع فريقنا", secondary: "استكشف خدماتنا", location: "عمّان، الأردن · نعمل حول العالم", index: "نبني حول احتياجاتك", indexNote: "ابدأ بالمشكلة. ونساعدك في تحديد الطريقة.",
     servicesLabel: "01 / خدماتنا", servicesTitle: "ذكاء اصطناعي خاص. وما يحتاجه من حلول.", servicesIntro: "ابدأ بالذكاء الاصطناعي أو بمشروع برمجي مستقل. نحدد العمل وفق ما تحتاجه.", details: "استكشف الخدمة",
