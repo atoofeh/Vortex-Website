@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/components/language-provider";
 import type { ServiceSlug } from "@/components/service-page";
 
 type Layer = "experience" | "software" | "intelligence" | "data" | "infrastructure";
@@ -11,6 +12,14 @@ const layerLabels: Record<Layer, string> = {
   intelligence: "Intelligence",
   data: "Data",
   infrastructure: "Infrastructure",
+};
+
+const layerLabelsAr: Record<Layer, string> = {
+  experience: "التجربة",
+  software: "البرمجيات",
+  intelligence: "الذكاء",
+  data: "البيانات",
+  infrastructure: "البنية التحتية",
 };
 
 const layerMap: Record<ServiceSlug, Layer[]> = {
@@ -25,15 +34,17 @@ const layerMap: Record<ServiceSlug, Layer[]> = {
 const nodeClass = "service-node border border-gold/25 bg-[#1f050c]/80 text-cream";
 
 export function LayerSignature({ slug }: { slug: ServiceSlug }) {
+  const { locale } = useLanguage();
+  const labels = locale === "ar" ? layerLabelsAr : layerLabels;
   const active = new Set(layerMap[slug]);
   return (
-    <div className="service-layer-signature" aria-label="Layers touched by this service">
-      <span className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-muted">Touches the stack</span>
+    <div className="service-layer-signature" aria-label={locale === "ar" ? "الطبقات التي تشملها هذه الخدمة" : "Layers touched by this service"}>
+      <span className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-muted">{locale === "ar" ? "طبقات النظام المرتبطة" : "Touches the stack"}</span>
       <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-2">
         {(Object.keys(layerLabels) as Layer[]).map((layer, index) => (
           <span key={layer} className={`service-layer-chip ${active.has(layer) ? "is-active" : ""}`}>
             <i aria-hidden="true" />
-            <span>{layerLabels[layer]}</span>
+            <span>{labels[layer]}</span>
             {index < 4 && <b aria-hidden="true">/</b>}
           </span>
         ))}
@@ -93,15 +104,24 @@ const mobileStates = [
   { label: "Connected", title: "The product stays in motion.", detail: "API events, notifications and intelligent features arrive through one product system.", tags: ["API", "Events"] },
 ];
 
+const mobileStatesAr: typeof mobileStates = [
+  { label: "الإعداد الأولي", title: "بداية واضحة من أول استخدام.", detail: "تُجهّز الهوية والصلاحيات والحالة المحلية قبل بدء المهمة الأولى.", tags: ["الهوية", "الحالة المحلية"] },
+  { label: "دون اتصال", title: "العمل يستمر حتى دون اتصال.", detail: "تُحفظ الإجراءات محلياً في قائمة انتظار، ثم تُزامن عند عودة الاتصال دون فقدان ما أنجزته.", tags: ["قائمة الانتظار", "المزامنة"] },
+  { label: "متصل", title: "منتجك يواكب كل جديد.", detail: "تصل أحداث واجهات API والإشعارات والميزات الذكية عبر نظام واحد متكامل للمنتج.", tags: ["واجهات API", "الأحداث"] },
+];
+
 function MobileProduct() {
+  const { locale } = useLanguage();
+  const arabic = locale === "ar";
+  const states = arabic ? mobileStatesAr : mobileStates;
   const [active, setActive] = useState(0);
-  const state = mobileStates[active];
+  const state = states[active];
   return (
     <div className="service-identity service-identity--mobile">
-      <div className="service-identity__heading"><span>03 / application state</span><span className="text-gold">interactive</span></div>
+      <div className="service-identity__heading"><span>{arabic ? "03 / حالة التطبيق" : "03 / application state"}</span><span className="text-gold">{arabic ? "تفاعلي" : "interactive"}</span></div>
       <div className="service-mobile-stage">
-        <div className="service-phone" aria-label={`Mobile application preview: ${state.label}`}><div className="service-phone__camera" /><div className="service-phone__screen"><span className="font-mono text-[0.55rem] text-gold">VORTEX / {state.label.toUpperCase()}</span><h3 className="mt-12 font-display text-2xl leading-tight text-cream">{state.title}</h3><div className="mt-7 h-1.5 w-2/3 bg-gold/45" /><div className="mt-3 h-1.5 w-1/2 bg-gold/20" /><div className="mt-10 grid gap-2">{state.tags.map((tag) => <span key={tag} className="border border-gold/20 px-3 py-2 font-mono text-[0.58rem] uppercase text-champagne">{tag}</span>)}</div></div></div>
-        <div className="service-mobile-copy"><p className="font-mono text-[0.62rem] uppercase tracking-[0.15em] text-gold">System state</p><p className="mt-4 text-lg leading-relaxed text-champagne">{state.detail}</p><div className="mt-7 flex flex-wrap gap-2">{mobileStates.map((item, index) => <button key={item.label} type="button" onClick={() => setActive(index)} aria-pressed={active === index} className={`focus-ring service-state-tab ${active === index ? "is-active" : ""}`}>{item.label}</button>)}</div></div>
+        <div className="service-phone" aria-label={`${arabic ? "معاينة تطبيق الجوال" : "Mobile application preview"}: ${state.label}`}><div className="service-phone__camera" /><div className="service-phone__screen"><span className="font-mono text-[0.55rem] text-gold">VORTEX / {state.label.toUpperCase()}</span><h3 className="mt-12 font-display text-2xl leading-tight text-cream">{state.title}</h3><div className="mt-7 h-1.5 w-2/3 bg-gold/45" /><div className="mt-3 h-1.5 w-1/2 bg-gold/20" /><div className="mt-10 grid gap-2">{state.tags.map((tag) => <span key={tag} className="border border-gold/20 px-3 py-2 font-mono text-[0.58rem] uppercase text-champagne">{tag}</span>)}</div></div></div>
+        <div className="service-mobile-copy"><p className="font-mono text-[0.62rem] uppercase tracking-[0.15em] text-gold">{arabic ? "حالة النظام" : "System state"}</p><p className="mt-4 text-lg leading-relaxed text-champagne">{state.detail}</p><div className="mt-7 flex flex-wrap gap-2">{states.map((item, index) => <button key={item.label} type="button" onClick={() => setActive(index)} aria-pressed={active === index} className={`focus-ring service-state-tab ${active === index ? "is-active" : ""}`}>{item.label}</button>)}</div></div>
       </div>
     </div>
   );
@@ -147,4 +167,3 @@ function ServiceIdentityVisual({ slug }: { slug: ServiceSlug }) {
 export function ServiceIdentity({ slug }: { slug: ServiceSlug }) {
   return <div className="service-identity-shell"><LayerSignature slug={slug} /><ServiceIdentityVisual slug={slug} /></div>;
 }
-
