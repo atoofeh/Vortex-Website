@@ -346,3 +346,125 @@ body.light,
 [data-theme="light"] .text-amber-600 {
   color: #92400E !important;
 }
+
+/* ==========================================================================
+   9. Service identity and architecture stack visuals
+   --------------------------------------------------------------------------
+   These components paint their own colours instead of using utilities, so
+   section 8 could not reach them. Every label was champagne or gold at a low
+   alpha — hierarchy built by fading toward the dark canvas, which inverts into
+   near-invisibility on paper. An audit of app/globals.css found 29 such rules
+   between 1.04:1 and 1.87:1.
+
+   The fade is rebuilt as three opaque tiers so the same reading order survives:
+
+     strong  #624B14  7.4:1  section headings, perimeter labels
+     muted   #7A6027  5.3:1  indices, health readouts, inactive tabs
+     active  #2A1015 15.8:1  selected / hovered items, previously near-white
+
+   Dots and glyphs follow the strong tier, and the ghosted stack numerals keep
+   their whisper by darkening rather than lightening.
+   ========================================================================== */
+
+/* --- Strong: labels that carry the section ------------------------------- */
+.light .service-identity__heading,
+.light .service-perimeter-label,
+.light .service-ai-private::before,
+.light .vortex-stack-node,
+.light .vortex-stack-console__topline,
+.light .vortex-stack-node.is-selected .vortex-stack-node__index,
+[data-theme="light"] .service-identity__heading,
+[data-theme="light"] .service-perimeter-label,
+[data-theme="light"] .service-ai-private::before,
+[data-theme="light"] .vortex-stack-node,
+[data-theme="light"] .vortex-stack-console__topline,
+[data-theme="light"] .vortex-stack-node.is-selected .vortex-stack-node__index {
+  color: #624B14 !important;
+}
+
+/* --- Muted: indices, readouts, inactive tabs ----------------------------- */
+.light .service-layer-chip,
+.light .service-topology__index,
+.light .service-topology__health,
+.light .service-workflow__index,
+.light .service-workflow__arrow,
+.light .service-state-tab,
+.light .service-browser__bar,
+.light .vortex-stack-node__index,
+.light .vortex-stack-responsibilities__index,
+[data-theme="light"] .service-layer-chip,
+[data-theme="light"] .service-topology__index,
+[data-theme="light"] .service-topology__health,
+[data-theme="light"] .service-workflow__index,
+[data-theme="light"] .service-workflow__arrow,
+[data-theme="light"] .service-state-tab,
+[data-theme="light"] .service-browser__bar,
+[data-theme="light"] .vortex-stack-node__index,
+[data-theme="light"] .vortex-stack-responsibilities__index {
+  color: #7A6027 !important;
+}
+
+/* --- Active: what was near-white becomes the darkest ink ----------------- */
+.light .service-layer-chip.is-active,
+.light .service-state-tab.is-active,
+.light .service-event-flow__node,
+.light .vortex-stack-node:hover,
+.light .vortex-stack-node.is-inspected,
+.light .vortex-stack-node.is-selected,
+.light .vortex-stack-node.is-inspected .vortex-stack-node__icon,
+.light .vortex-stack-node.is-selected .vortex-stack-node__icon,
+[data-theme="light"] .service-layer-chip.is-active,
+[data-theme="light"] .service-state-tab.is-active,
+[data-theme="light"] .service-event-flow__node,
+[data-theme="light"] .vortex-stack-node:hover,
+[data-theme="light"] .vortex-stack-node.is-inspected,
+[data-theme="light"] .vortex-stack-node.is-selected,
+[data-theme="light"] .vortex-stack-node.is-inspected .vortex-stack-node__icon,
+[data-theme="light"] .vortex-stack-node.is-selected .vortex-stack-node__icon {
+  color: #2A1015 !important;
+}
+
+/* --- Dots and glyphs ----------------------------------------------------- */
+.light .service-node-dot,
+.light .service-topology__health i,
+.light .service-event-flow__node i,
+.light .vortex-stack-node__icon,
+[data-theme="light"] .service-node-dot,
+[data-theme="light"] .service-topology__health i,
+[data-theme="light"] .service-event-flow__node i,
+[data-theme="light"] .vortex-stack-node__icon {
+  color: #624B14 !important;
+}
+
+.light .service-layer-chip.is-active i,
+.light .service-topology__health i,
+[data-theme="light"] .service-layer-chip.is-active i,
+[data-theme="light"] .service-topology__health i {
+  background: #624B14 !important;
+}
+
+.light .service-event-flow__node i,
+[data-theme="light"] .service-event-flow__node i {
+  background: rgba(98, 75, 20, 0.12) !important;
+}
+
+.light .service-browser__bar i,
+[data-theme="light"] .service-browser__bar i {
+  background: rgba(98, 75, 20, 0.55) !important;
+}
+
+/* Separator between layer chips — meta, so it uses the faint ink token. */
+.light .service-layer-chip b,
+[data-theme="light"] .service-layer-chip b {
+  color: #9A8087 !important;
+}
+
+/* Ghosted numerals stay a whisper; only the hue flips so they read against
+   paper the way they read against the dark canvas. Stroke width is left to
+   whichever rule set it. */
+.light .vortex-stack-number,
+[data-theme="light"] .vortex-stack-number {
+  color: rgba(98, 75, 20, 0.09) !important;
+  -webkit-text-stroke-color: rgba(98, 75, 20, 0.24) !important;
+  text-shadow: 0 0 28px rgba(98, 75, 20, 0.12) !important;
+}
