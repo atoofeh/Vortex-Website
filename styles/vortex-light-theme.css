@@ -277,3 +277,72 @@ body.light,
   color: #2A1015 !important;
   border-color: rgba(138, 106, 28, 0.3) !important;
 }
+
+/* ==========================================================================
+   8. Contrast repairs for utilities that only ever had dark-mode values
+   --------------------------------------------------------------------------
+   The Tailwind palette in tailwind.config.ts is tuned for the #1F050C canvas,
+   so a handful of utilities were never remapped when the surfaces behind them
+   turned pale. Measured against the light canvas (#F7F0EE) and the sunk panel
+   (#EDE2DF) these all fell under the 4.5:1 AA floor:
+
+     text-gold        #D4AF37   1.87:1
+     hover:text-cream #FDFCFA   1.10:1   (copy vanished on hover)
+     hover:text-champagne #E5C378  1.50:1
+     text-rose-300    #FDA4AF   1.68:1
+     text-rose-400    #FB7185   2.39:1
+     text-amber-600   #D97706   2.83:1
+
+   Each one is remapped to the light token already carrying the same role, so
+   the hierarchy is unchanged and only the legibility moves.
+   ========================================================================== */
+
+/* Gold-keyed copy and icons — same antique gold as the eyebrows above. */
+.light .text-gold,
+.light .text-gold\/90,
+.light .text-gold\/80,
+.light .text-gold\/70,
+.light .text-gold\/60,
+.light .text-gold\/50,
+.light [class*="text-gold/"],
+[data-theme="light"] .text-gold,
+[data-theme="light"] .text-gold\/90,
+[data-theme="light"] .text-gold\/80,
+[data-theme="light"] .text-gold\/70,
+[data-theme="light"] .text-gold\/60,
+[data-theme="light"] .text-gold\/50,
+[data-theme="light"] [class*="text-gold/"] {
+  color: #624B14 !important;
+}
+
+/* Hover states. The base utility is already remapped above, but the hover
+   variant is a separate class and kept resolving to its dark-mode value. */
+.light .hover\:text-cream:hover,
+[data-theme="light"] .hover\:text-cream:hover {
+  color: #2A1015 !important;
+}
+
+.light .hover\:text-champagne:hover,
+[data-theme="light"] .hover\:text-champagne:hover {
+  color: #624B14 !important;
+}
+
+/* Risk / blocked states in the sovereignty perimeter. The panels behind them
+   are remapped to #EDE2DF by section 5, which left the rose copy floating. */
+.light .text-rose-300,
+.light .text-rose-400,
+[data-theme="light"] .text-rose-300,
+[data-theme="light"] .text-rose-400 {
+  color: #9F1239 !important;
+}
+
+.light [class*="bg-rose-950"],
+[data-theme="light"] [class*="bg-rose-950"] {
+  background-color: #F7DDE3 !important;
+}
+
+/* Sun glyph in the theme toggle, on its own bg-amber-50 chip. */
+.light .text-amber-600,
+[data-theme="light"] .text-amber-600 {
+  color: #92400E !important;
+}
