@@ -52,7 +52,7 @@ body:has(.refresh-home, .refresh-about-page) .vortex-field { opacity: .08; }
 .refresh-footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); padding-top: 1.5rem; color: var(--text-muted); font-size: .75rem; }
 .refresh-header { position: fixed; z-index: 60; inset-inline: 0; top: 1rem; padding-inline: 1.5rem; }
 .refresh-header-bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; max-width: 1240px; margin-inline: auto; padding: .65rem 1rem; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--bg-primary) 94%, transparent); backdrop-filter: blur(16px); }
-.refresh-brand { display: flex; align-items: center; gap: .1rem; flex-shrink: 0; color: var(--text-primary); font-size: .95rem; font-weight: 700; }
+.refresh-brand { display: flex; direction: ltr; flex-direction: row; align-items: center; gap: .1rem; flex-shrink: 0; color: var(--text-primary); font-size: .95rem; font-weight: 700; }
 .refresh-brand img { width: 36px; height: 36px; }
 .refresh-desktop-nav { display: flex; gap: .25rem; }
 .refresh-nav-link { display: inline-flex; align-items: center; gap: .4rem; padding: .7rem .85rem; color: var(--text-muted); font-size: .875rem; }
@@ -85,6 +85,10 @@ html[dir] .refresh-field input[dir="ltr"] { text-align: left; }
 .refresh-about-contact { border-block: 1px solid var(--line); padding-block: 3rem; }
 html[lang="ar"] .refresh-label, .ar-route .refresh-label { font-family: var(--font-arabic), sans-serif; letter-spacing: 0; }
 html[lang="ar"] #main-content .refresh-hero-title, .ar-route #main-content .refresh-hero-title { font-size: clamp(3rem, 5.6vw, 5.3rem); letter-spacing: 0; line-height: 1.3; }
+/* The VORTEX lockup reads left to right, so the Arabic header keeps the brand
+   at the left edge like the English bar. Only the top-level clusters swap
+   sides; the nav links and header controls stay in their RTL order. */
+html[dir="rtl"] .refresh-header-bar, .ar-route .refresh-header-bar { flex-direction: row-reverse; }
 @media (max-width: 1023px) {
   .refresh-desktop-nav, .refresh-header-cta { display: none; }
   .refresh-menu-toggle { display: grid; }
